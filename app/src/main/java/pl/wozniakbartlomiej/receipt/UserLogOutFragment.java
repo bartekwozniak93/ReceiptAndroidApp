@@ -15,23 +15,23 @@ import com.facebook.login.LoginManager;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class UserFragment extends Fragment {
+public class UserLogOutFragment extends Fragment {
 
     private SessionManager session;
 
-    public UserFragment() {
+    public UserLogOutFragment() {
         // Required empty public constructor
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_user, container, false);
+        View view = inflater.inflate(R.layout.fragment_logout, container, false);
 
         session = new SessionManager(getActivity().getApplicationContext());
-
+        String userEmail = session.getProperty(SessionManager.SessionKey.EMAIL);
         TextView textView_LoggedAs = (TextView) view.findViewById(R.id.textView_LoggedAs);
-        textView_LoggedAs.setText("You are logged as "+session.getUserEmail());
+        textView_LoggedAs.setText("You are logged as "+userEmail);
 
         Button b = (Button) view.findViewById(R.id.btn_logout);
         b.setOnClickListener(new OnClickListener() {

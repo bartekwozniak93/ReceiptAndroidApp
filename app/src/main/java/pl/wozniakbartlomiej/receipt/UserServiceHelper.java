@@ -23,7 +23,7 @@ import java.net.URL;
 public class UserServiceHelper extends AsyncTask<String, Void, String> {
     public ProgressDialog pd;
 
-    public IUserServiceHelper delegate = null;
+    public IUserServiceHelper delegate;
     private Context applicationContext;
     private Resources applicationResources;
     private String api_link;

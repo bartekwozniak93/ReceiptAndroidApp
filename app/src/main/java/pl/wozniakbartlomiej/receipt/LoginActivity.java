@@ -21,7 +21,7 @@ import org.json.JSONObject;
 
 import java.util.Arrays;
 
-public class UserActivity extends AppCompatActivity implements IUserServiceHelper {
+public class LoginActivity extends AppCompatActivity implements IUserServiceHelper {
 
     private TextView info;
     private LoginButton loginFacebookButton;
@@ -36,7 +36,7 @@ public class UserActivity extends AppCompatActivity implements IUserServiceHelpe
         FacebookSdk.sdkInitialize(getApplicationContext());
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user);
+        setContentView(R.layout.activity_login);
 
         session = new SessionManager(getApplicationContext());
 
@@ -64,8 +64,8 @@ public class UserActivity extends AppCompatActivity implements IUserServiceHelpe
 
 
                                     //Execute async method for login.
-                                    asyncTask = new UserServiceHelper(UserActivity.this);
-                                    asyncTask.delegate = UserActivity.this;
+                                    asyncTask = new UserServiceHelper(LoginActivity.this);
+                                    asyncTask.delegate = LoginActivity.this;
                                     asyncTask.execute(ServiceHelper.POST_METHOD, asyncTask.getFacebookString(), email, "");
 
                                 }
@@ -105,7 +105,7 @@ public class UserActivity extends AppCompatActivity implements IUserServiceHelpe
         EditText editText_Password = (EditText) findViewById(R.id.editText_Password);
         String password = editText_Password.getText().toString().toLowerCase();
         //Execute async method for login.
-        asyncTask = new UserServiceHelper(UserActivity.this);
+        asyncTask = new UserServiceHelper(LoginActivity.this);
         asyncTask.delegate = this;
         asyncTask.execute(ServiceHelper.POST_METHOD, asyncTask.getLoginString(), email, password);
     }

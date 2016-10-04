@@ -9,6 +9,6 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:id="@+id/fragment"
-        android:name="pl.wozniakbartlomiej.receipt.UserFragment"
-        android:layout="@layout/fragment_user"/>
+        android:name="pl.wozniakbartlomiej.receipt.UserLogOutFragment"
+        android:layout="@layout/fragment_logout"/>
 </LinearLayout>
