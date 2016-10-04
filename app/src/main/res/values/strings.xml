@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Receipt</string>
+    <string name="facebook_app_id">655903584573569</string>
+    <string name="btn_login">Sign in</string>
+    <string name="btn_register">Register</string>
+    <string name="btn_logout">Log out</string>
+    <string name="api_link">https://receipt-is3261.herokuapp.com</string>
+    <string name="api_login">/api/local/login</string>
+    <string name="api_logout">/api/local/logout</string>
+    <string name="api_users">/api/local/users</string>
+    <string name="api_facebook">/api/facebook/login</string>
+</resources>
