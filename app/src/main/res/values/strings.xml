@@ -5,6 +5,8 @@
     <string name="btn_register">Register</string>
     <string name="btn_logout">Log out</string>
     <string name="textview_logged_as">You are logged as</string>
+    <string name="warning_email_already_taken">Email already taken.</string>
+    <string name="progress_dialog_header">Please, wait...</string>
     <string name="api_link">https://receipt-is3261.herokuapp.com</string>
     <string name="api_login">/api/local/login</string>
     <string name="api_logout">/api/local/logout</string>

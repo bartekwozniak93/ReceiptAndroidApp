@@ -5,23 +5,23 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.os.AsyncTask;
 
-import org.json.JSONObject;
-
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.HashMap;
 
 /**
- * Helper for REST Service
+ * Helper for REST Service.
  */
 public class UserServiceHelper extends AsyncTask<String, Void, String> {
-    public ProgressDialog pd;
+
+    public static String PARAMS_EMAIL = "email";
+    public static String PARAMS_PASSWORD = "password";
+
+    private ProgressDialog progressDialog;
 
     public IUserServiceHelper delegate;
     private Context applicationContext;
@@ -32,6 +32,70 @@ public class UserServiceHelper extends AsyncTask<String, Void, String> {
         this.applicationContext = context;
         this.applicationResources = context.getResources();
         this.api_link = applicationResources.getString(R.string.api_link);
+    }
+
+    @Override
+    protected void onPreExecute() {
+        //initialize progress dialog before executing
+        progressDialog=ProgressDialog.show(applicationContext,"",applicationResources.getString(R.string.progress_dialog_header),false);
+    }
+
+    @Override
+    protected String doInBackground(String... params) {
+        String requestMethod = params[0];
+        String url = params[1];
+        String email = params[2];
+        String password = params[3];
+        HashMap<String, String> requestParameters = new HashMap<>();
+        requestParameters.put(PARAMS_EMAIL, email);
+        requestParameters.put(PARAMS_PASSWORD, password);
+        return getJSON(requestMethod, url, requestParameters);
+    }
+
+    @Override
+    public void onPostExecute(String result) {
+        //close progress dialog before executing
+        progressDialog.dismiss();
+        //pass result through delegate
+        delegate.userServiceProcess(result);
+    }
+
+    /**
+     * Get result from service for authorization methods
+     * as a JSON object.
+     */
+    public String getJSON(String requestMethod, String url, HashMap<String, String> requestParameters) {
+        URL serviceUrl = new ServiceHelper().convertToUrl(url);
+        HttpURLConnection httpURLConnection = null;
+        int responseCode = -1;
+        StringBuilder stringBuilder = new StringBuilder();
+        try {
+            //Prepare Request Before Send
+            httpURLConnection = (HttpURLConnection) serviceUrl.openConnection();
+            httpURLConnection.setRequestMethod(requestMethod);
+            httpURLConnection.setRequestProperty("Authorization", getAuthorizationToken());
+            httpURLConnection.addRequestProperty("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
+            //Add parameters to Request Body.
+            ServiceHelper.addParamsToRequestBody(httpURLConnection, requestParameters);
+            //Send request
+            httpURLConnection.connect();
+            responseCode = httpURLConnection.getResponseCode();
+            if (responseCode == httpURLConnection.HTTP_OK) {
+                InputStream inputStream = httpURLConnection.getInputStream();
+                BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    stringBuilder.append(line);
+                }
+                inputStream.close();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            httpURLConnection.disconnect();
+        }
+
+        return stringBuilder.toString();
     }
 
     /**
@@ -68,81 +132,6 @@ public class UserServiceHelper extends AsyncTask<String, Void, String> {
     public String getAuthorizationToken() {
         String jwtToken = "JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI1N2YxMDhiNzMzOTlmZGJhMTIyMjA3ZTEiLCJqdGkiOiJjODEyM2YyYy0wZjJlLTRlYWYtOGViYi0yMGQ5ZTllZDg1NWYiLCJpYXQiOjE0NzU0MjQxMTgsImV4cCI6MTQ3NTQyNzExOH0.kgixc896yTCFTQ05gqgo0GvOvH9GlH1fkXof0bYrrvw";
         return jwtToken;
-    }
-
-
-    protected String doInBackground(String... strings) {
-        return getJSON(strings[0], strings[1], strings[2], strings[3]);
-    }
-
-    @Override
-    protected void onPreExecute() {
-        pd=ProgressDialog.show(applicationContext,"","Please Wait",false);
-    }
-
-    public String getJSON(String requestMethod, String url, String email, String password) {
-
-
-        URL serviceUrl = new ServiceHelper().convertToUrl(url);
-        HttpURLConnection httpURLConnection = null;
-        int responseCode = -1;
-        StringBuilder stringBuilder = new StringBuilder();
-
-
-        try {
-            httpURLConnection = (HttpURLConnection) serviceUrl.openConnection();
-            httpURLConnection.setRequestMethod(requestMethod);
-            httpURLConnection.setRequestProperty("Authorization", getAuthorizationToken());
-            httpURLConnection.addRequestProperty("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
-
-            addParamsToRequestBody(httpURLConnection, email, password);
-
-            httpURLConnection.connect();
-
-            responseCode = httpURLConnection.getResponseCode();
-
-            if (responseCode == httpURLConnection.HTTP_OK) {
-                InputStream inputStream = httpURLConnection.getInputStream();
-                BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    stringBuilder.append(line);
-                }
-                inputStream.close();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            httpURLConnection.disconnect();
-        }
-
-        return stringBuilder.toString();
-
-    }
-
-    public void onPostExecute(String result) {
-        pd.dismiss();
-        delegate.userServiceProcess(result);
-
-    }
-
-    private void addParamsToRequestBody(HttpURLConnection httpURLConnection, String email, String password) {
-        try {
-            JSONObject postDataParams = new JSONObject();
-            postDataParams.put("email", email);
-            postDataParams.put("password", password);
-            OutputStream os = httpURLConnection.getOutputStream();
-            BufferedWriter writer = new BufferedWriter(
-                    new OutputStreamWriter(os, "UTF-8"));
-            writer.write(new ServiceHelper().getPostDataString(postDataParams));
-
-            writer.flush();
-            writer.close();
-            os.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
 }

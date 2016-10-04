@@ -1,7 +1,7 @@
 package pl.wozniakbartlomiej.receipt;
 
 /**
- * Created by Bartek on 03/10/16.
+ * Interface for multiple use of async implementation.
  */
 public interface IUserServiceHelper {
     void userServiceProcess(String result);

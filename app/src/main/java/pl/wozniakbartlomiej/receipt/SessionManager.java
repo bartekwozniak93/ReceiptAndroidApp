@@ -15,6 +15,7 @@ public class SessionManager {
     Context _context;
     int PRIVATE_MODE = 0;
     static final String PREF_NAME = "ApplicationPreferences";
+    static final String TOKEN_PREFIX = "JWT ";
     /**
      * Enum keys for properties.
      * */
@@ -42,13 +43,14 @@ public class SessionManager {
      * */
     public void createLoginSession(String email, String token){
         editor.putBoolean(SessionKey.IS_LOGGED_IN.name(), true);
-        editor.putString(SessionKey.TOKEN.name(), token);
+        editor.putString(SessionKey.TOKEN.name(), TOKEN_PREFIX+token);
         editor.putString(SessionKey.EMAIL.name(), email);
         editor.commit();
     }
 
     /**
-     * Check user is logged in, if not redirect to LoginActivity.
+     * Check user is logged in (redirect to MainActivity),
+     * if not redirect to LoginActivity.
      * */
     public void checkLogin(){
         if(!this.isLoggedIn()){
@@ -60,7 +62,6 @@ public class SessionManager {
             // Start Login Activity
             _context.startActivity(i);
         }
-
     }
 
     /**

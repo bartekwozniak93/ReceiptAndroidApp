@@ -11,6 +11,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        initSession();
+    }
+
+    /**
+     * Init session for checking users permissions.
+     */
+    private void initSession(){
         session = new SessionManager(getApplicationContext());
         session.checkLogin();
     }

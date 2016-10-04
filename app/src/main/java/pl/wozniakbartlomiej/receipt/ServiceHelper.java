@@ -1,11 +1,20 @@
 package pl.wozniakbartlomiej.receipt;
 
+import android.util.Log;
+
+import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedWriter;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 
 /**
  * Created by Bartek on 03/10/16.
@@ -20,7 +29,7 @@ public class ServiceHelper {
      * https://www.studytutorial.in/android-httpurlconnection-post-and-get-request-tutorial
      * Add params JSONObject to POST Request.
      */
-    public String getPostDataString(JSONObject params) throws Exception {
+    public static String getPostDataString(JSONObject params) throws Exception {
 
         StringBuilder result = new StringBuilder();
         boolean first = true;
@@ -48,7 +57,7 @@ public class ServiceHelper {
      * The following code convertToUrl is from
      * http://fancifulandroid.blogspot.sg/2013/07/android-convert-string-to-valid-url.html
      */
-    public URL convertToUrl(String urlStr) {
+    public static URL convertToUrl(String urlStr) {
         try {
             URL url = new URL(urlStr);
             URI uri = new URI(url.getProtocol(), url.getUserInfo(),
@@ -60,5 +69,42 @@ public class ServiceHelper {
             e.printStackTrace();
         }
         return null;
+    }
+
+    /**
+     * The following code convertToUrl is from
+     * http://fancifulandroid.blogspot.sg/2013/07/android-convert-string-to-valid-url.html
+     */
+    public static void addParamsToRequestBody(HttpURLConnection httpURLConnection, HashMap<String, String> values) {
+        try {
+            JSONObject postDataParams = putValuesIntoJSON(values);
+            OutputStream streamm = httpURLConnection.getOutputStream();
+            BufferedWriter writer = new BufferedWriter(
+                    new OutputStreamWriter(streamm, "UTF-8"));
+            writer.write(new ServiceHelper().getPostDataString(postDataParams));
+            writer.flush();
+            writer.close();
+            streamm.close();
+        } catch (Exception e) {
+            Log.d("UserServiceHelper", e.getMessage());
+        }
+    }
+
+    /**
+     * Put hashmap into JSONObject
+     */
+    private static JSONObject putValuesIntoJSON(HashMap<String, String> values){
+        JSONObject postDataParams = new JSONObject();
+        Iterator it = values.entrySet().iterator();
+        while (it.hasNext()) {
+            Map.Entry pair = (Map.Entry)it.next();
+            try {
+                postDataParams.put(pair.getKey().toString(), pair.getValue().toString());
+            } catch (JSONException e) {
+                Log.d("UserServiceHelper", e.getMessage());
+            }
+            it.remove();
+        }
+        return postDataParams;
     }
 }
