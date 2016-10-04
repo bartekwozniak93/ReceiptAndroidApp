@@ -3,6 +3,7 @@ package pl.wozniakbartlomiej.receipt;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -13,11 +14,13 @@ import android.widget.TextView;
 import com.facebook.login.LoginManager;
 
 /**
- * A simple {@link Fragment} subclass.
+ * Fragment for user loggout button
+ * and info who is logged in.
  */
 public class UserLogOutFragment extends Fragment {
 
     private SessionManager session;
+    private View view;
 
     public UserLogOutFragment() {
         // Required empty public constructor
@@ -26,25 +29,46 @@ public class UserLogOutFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_logout, container, false);
 
+        //Initialize fragment to find its elements.
+        view = inflater.inflate(R.layout.fragment_logout, container, false);
+        //Initialize session to get user information.
         session = new SessionManager(getActivity().getApplicationContext());
+
+        setInfoAboutLoggedUser();
+        addButtonListnerForLogOut();
+
+        return view;
+    }
+
+    /**
+     * Set information (email) of the user
+     * in TextView.
+     */
+    private void setInfoAboutLoggedUser(){
+        String loggedAsText = getContext().getString(R.string.textview_logged_as);
         String userEmail = session.getProperty(SessionManager.SessionKey.EMAIL);
         TextView textView_LoggedAs = (TextView) view.findViewById(R.id.textView_LoggedAs);
-        textView_LoggedAs.setText("You are logged as "+userEmail);
+        textView_LoggedAs.setText(loggedAsText+" "+userEmail);
+    }
 
-        Button b = (Button) view.findViewById(R.id.btn_logout);
-        b.setOnClickListener(new OnClickListener() {
+    /**
+     * Add listener to button for log out event.
+     */
+    private void addButtonListnerForLogOut(){
+        Button button = (Button) view.findViewById(R.id.btn_logout);
+        button.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
                 try {
                     LoginManager.getInstance().logOut();
                 }
-                catch(Exception e){};
+                catch(Exception e){
+                    Log.d("Button_Fragment","Problem with loging out user.");
+                };
                 session.logoutUser();
                 session.checkLogin();
             }
         });
-        return view;
     }
 
 

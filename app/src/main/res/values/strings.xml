@@ -4,6 +4,7 @@
     <string name="btn_login">Sign in</string>
     <string name="btn_register">Register</string>
     <string name="btn_logout">Log out</string>
+    <string name="textview_logged_as">You are logged as</string>
     <string name="api_link">https://receipt-is3261.herokuapp.com</string>
     <string name="api_login">/api/local/login</string>
     <string name="api_logout">/api/local/logout</string>
