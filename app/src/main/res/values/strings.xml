@@ -12,4 +12,5 @@
     <string name="api_logout">/api/local/logout</string>
     <string name="api_users">/api/local/users</string>
     <string name="api_facebook">/api/facebook/login</string>
+    <string name="cam">Go to Camera</string>
 </resources>
