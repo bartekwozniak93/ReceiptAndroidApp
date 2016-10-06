@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.ImageView;
 
 public class CameraActivity extends AppCompatActivity {
@@ -17,7 +18,7 @@ public class CameraActivity extends AppCompatActivity {
         result = (ImageView) findViewById(R.id.imageView);
     }
 
-    public void dispatchTakePictureIntent() {
+    public void dispatchTakePictureIntent(View view) {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
             startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
