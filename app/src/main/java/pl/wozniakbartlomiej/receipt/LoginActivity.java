@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.facebook.CallbackManager;
@@ -23,10 +22,9 @@ import java.util.Arrays;
 
 public class LoginActivity extends AppCompatActivity implements IUserServiceHelper {
 
-    private TextView info;
+    //Button for facebook login
     private LoginButton loginFacebookButton;
     private CallbackManager callbackManager;
-    private UserServiceHelper userServiceHelper;
     private UserServiceHelper asyncTask;
     private SessionManager session;
 
@@ -46,47 +44,53 @@ public class LoginActivity extends AppCompatActivity implements IUserServiceHelp
                 "public_profile", "email", "user_friends"));
         callbackManager = CallbackManager.Factory.create();
 
-
+        /**
+         * Handle facebook callback
+         */
         loginFacebookButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
 
-              GraphRequest request=  GraphRequest.newMeRequest(
+                GraphRequest request = GraphRequest.newMeRequest(
                         loginResult.getAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
 
-                          @Override
+                            @Override
                             public void onCompleted(JSONObject me, GraphResponse response) {
-
                                 if (response.getError() != null) {
-                                    // handle error
+                                    Toast.makeText(LoginActivity.this, "Response error!", Toast.LENGTH_SHORT).show();
                                 } else {
                                     String email = me.optString("email");
-
-
-                                    //Execute async method for login.
-                                    asyncTask = new UserServiceHelper(LoginActivity.this);
-                                    asyncTask.delegate = LoginActivity.this;
-                                    asyncTask.execute(ServiceHelper.POST_METHOD, asyncTask.getFacebookString(), email, "");
-
+                                    loginLocalByFb(email);
                                 }
                             }
                         });
+                addBundleToFbRequest(request);
+            }
+
+            @Override
+            public void onCancel() {
+                Toast.makeText(LoginActivity.this, "Login attempt canceled", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onError(FacebookException e) {
+                Toast.makeText(LoginActivity.this, "Login attempt canceled", Toast.LENGTH_SHORT).show();
+            }
+
+            private void addBundleToFbRequest(GraphRequest request) {
                 Bundle parameters = new Bundle();
                 parameters.putString("fields", "id,name,email");
                 request.setParameters(parameters);
                 request.executeAsync();
             }
-
-            @Override
-            public void onCancel() {
-                //info.setText("Login attempt canceled.");
-            }
-
-            @Override
-            public void onError(FacebookException e) {
-                //info.setText("Login attempt canceled.");
-            }
         });
+    }
+
+    private void loginLocalByFb(String email) {
+        //Execute async method for login.
+        asyncTask = new UserServiceHelper(LoginActivity.this);
+        asyncTask.delegate = LoginActivity.this;
+        asyncTask.execute(ServiceHelper.POST_METHOD, asyncTask.getFacebookString(), email, "");
     }
 
     @Override
