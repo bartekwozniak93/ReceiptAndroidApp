@@ -16,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
         initSession();
     }
 
+    //onClick button leads MainActivity->CameraActivity.
     public void onClick_Camera(View view){
         Intent i = new Intent(this, CameraActivity.class);
         startActivity(i);

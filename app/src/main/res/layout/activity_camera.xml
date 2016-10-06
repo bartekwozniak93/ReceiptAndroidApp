@@ -10,7 +10,7 @@
     android:weightSum="1"
     android:paddingTop="20dp">
 
-
+    <!--this will hold the image the camera has taken-->
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -18,6 +18,8 @@
         android:id="@+id/imageView"
         android:layout_weight="0.69" />
 
+
+    <!--this button activates the camera app-->
     <Button
         android:text="Button"
         android:layout_width="match_parent"

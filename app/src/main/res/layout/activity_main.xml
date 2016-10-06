@@ -13,8 +13,7 @@
         android:layout="@layout/fragment_logout"
         tools:layout="@layout/fragment_logout" />
 
-    <!--testing camera from login directly.
-    -->
+    <!--testing camera from login directly.-->
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
