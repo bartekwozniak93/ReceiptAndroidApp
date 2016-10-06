@@ -3,12 +3,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal"
+    android:orientation="vertical"
     tools:context="pl.wozniakbartlomiej.receipt.MainActivity">
     <fragment
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:id="@+id/fragment"
         android:name="pl.wozniakbartlomiej.receipt.UserLogOutFragment"
-        android:layout="@layout/fragment_logout"/>
+        android:layout="@layout/fragment_logout"
+        tools:layout="@layout/fragment_logout" />
+
+    <!--testing camera from login directly.
+    -->
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="onClick_Camera"
+        android:id="@+id/btn_camera"
+        android:text="@string/cam"
+        />
 </LinearLayout>
