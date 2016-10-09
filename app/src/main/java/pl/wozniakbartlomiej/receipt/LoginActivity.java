@@ -20,7 +20,7 @@ import org.json.JSONObject;
 
 import java.util.Arrays;
 
-public class LoginActivity extends AppCompatActivity implements IUserServiceHelper {
+public class LoginActivity extends AppCompatActivity implements IServiceHelper {
 
     //Button for facebook login
     private LoginButton loginFacebookButton;
@@ -118,7 +118,7 @@ public class LoginActivity extends AppCompatActivity implements IUserServiceHelp
      * User login callback result.
      */
     @Override
-    public void userServiceProcess(String result) {
+    public void processService(String result) {
         try {
             JSONObject resultObject = new JSONObject(result);
             JSONObject userObject = resultObject.getJSONObject("user");

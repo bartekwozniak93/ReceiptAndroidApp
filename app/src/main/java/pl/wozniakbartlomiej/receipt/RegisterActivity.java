@@ -11,7 +11,7 @@ import android.widget.Toast;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class RegisterActivity extends AppCompatActivity implements IUserServiceHelper {
+public class RegisterActivity extends AppCompatActivity implements IServiceHelper {
 
     private UserServiceHelper asyncTask;
     private SessionManager session;
@@ -62,7 +62,7 @@ public class RegisterActivity extends AppCompatActivity implements IUserServiceH
     }
 
     @Override
-    public void userServiceProcess(String result) {
+    public void processService(String result) {
         try {
             retrieveUserInformationFromJSON(result);
             //Redirect to MainActivity

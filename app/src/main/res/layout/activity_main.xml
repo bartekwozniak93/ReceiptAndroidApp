@@ -22,4 +22,12 @@
         android:id="@+id/btn_camera"
         android:text="@string/cam"
         />
+
+    <fragment
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
+        android:name="pl.wozniakbartlomiej.receipt.FindUsersFragment"
+        android:id="@+id/fragment2" />
+
+
 </LinearLayout>

@@ -23,21 +23,23 @@ public class UserServiceHelper extends AsyncTask<String, Void, String> {
 
     private ProgressDialog progressDialog;
 
-    public IUserServiceHelper delegate;
+    public IServiceHelper delegate;
     private Context applicationContext;
     private Resources applicationResources;
     private String api_link;
+    private SessionManager session;
 
     public UserServiceHelper(Context context) {
         this.applicationContext = context;
         this.applicationResources = context.getResources();
         this.api_link = applicationResources.getString(R.string.api_link);
+        this.session = new SessionManager(context);
     }
 
     @Override
     protected void onPreExecute() {
         //initialize progress dialog before executing
-        progressDialog=ProgressDialog.show(applicationContext,"",applicationResources.getString(R.string.progress_dialog_header),false);
+        //progressDialog=ProgressDialog.show(applicationContext,"",applicationResources.getString(R.string.progress_dialog_header),false);
     }
 
     @Override
@@ -55,9 +57,9 @@ public class UserServiceHelper extends AsyncTask<String, Void, String> {
     @Override
     public void onPostExecute(String result) {
         //close progress dialog before executing
-        progressDialog.dismiss();
+        //progressDialog.dismiss();
         //pass result through delegate
-        delegate.userServiceProcess(result);
+        delegate.processService(result);
     }
 
     /**
@@ -127,10 +129,17 @@ public class UserServiceHelper extends AsyncTask<String, Void, String> {
     }
 
     /**
+     * Return link for find users name
+     */
+    public String getUserFindString() {
+        return api_link + applicationResources.getString(R.string.api_users_find);
+    }
+
+    /**
      * Return token of the user
      */
     public String getAuthorizationToken() {
-        String jwtToken = "JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI1N2YxMDhiNzMzOTlmZGJhMTIyMjA3ZTEiLCJqdGkiOiJjODEyM2YyYy0wZjJlLTRlYWYtOGViYi0yMGQ5ZTllZDg1NWYiLCJpYXQiOjE0NzU0MjQxMTgsImV4cCI6MTQ3NTQyNzExOH0.kgixc896yTCFTQ05gqgo0GvOvH9GlH1fkXof0bYrrvw";
+        String jwtToken =session.getProperty(SessionManager.SessionKey.TOKEN);
         return jwtToken;
     }
 
