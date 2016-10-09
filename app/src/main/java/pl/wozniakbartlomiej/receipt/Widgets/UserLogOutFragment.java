@@ -1,4 +1,4 @@
-package pl.wozniakbartlomiej.receipt;
+package pl.wozniakbartlomiej.receipt.Widgets;
 
 
 import android.os.Bundle;
@@ -12,6 +12,9 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.facebook.login.LoginManager;
+
+import pl.wozniakbartlomiej.receipt.R;
+import pl.wozniakbartlomiej.receipt.Services.SessionManager;
 
 /**
  * Fragment for user loggout button
@@ -67,6 +70,7 @@ public class UserLogOutFragment extends Fragment {
                 };
                 session.logoutUser();
                 session.checkLogin();
+
             }
         });
     }

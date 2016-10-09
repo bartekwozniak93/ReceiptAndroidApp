@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="pl.wozniakbartlomiej.receipt.CameraActivity"
+    tools:context=".Activities.CameraActivity"
     android:weightSum="1"
     android:paddingTop="20dp">
 
