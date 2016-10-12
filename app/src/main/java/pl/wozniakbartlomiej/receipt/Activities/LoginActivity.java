@@ -1,5 +1,6 @@
-package pl.wozniakbartlomiej.receipt;
+package pl.wozniakbartlomiej.receipt.Activities;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -20,6 +21,12 @@ import org.json.JSONObject;
 
 import java.util.Arrays;
 
+import pl.wozniakbartlomiej.receipt.R;
+import pl.wozniakbartlomiej.receipt.Services.ServiceHelper;
+import pl.wozniakbartlomiej.receipt.Services.IUserServiceHelper;
+import pl.wozniakbartlomiej.receipt.Services.UserServiceHelper;
+import pl.wozniakbartlomiej.receipt.Services.SessionManager;
+
 public class LoginActivity extends AppCompatActivity implements IUserServiceHelper {
 
     //Button for facebook login
@@ -27,6 +34,7 @@ public class LoginActivity extends AppCompatActivity implements IUserServiceHelp
     private CallbackManager callbackManager;
     private UserServiceHelper asyncTask;
     private SessionManager session;
+    public ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,13 +52,14 @@ public class LoginActivity extends AppCompatActivity implements IUserServiceHelp
                 "public_profile", "email", "user_friends"));
         callbackManager = CallbackManager.Factory.create();
 
+
         /**
          * Handle facebook callback
          */
         loginFacebookButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
-
+                progressDialog = ProgressDialog.show(LoginActivity.this, "", getApplicationContext().getString(R.string.progress_dialog_header), false);
                 GraphRequest request = GraphRequest.newMeRequest(
                         loginResult.getAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
 
@@ -111,6 +120,7 @@ public class LoginActivity extends AppCompatActivity implements IUserServiceHelp
         //Execute async method for login.
         asyncTask = new UserServiceHelper(LoginActivity.this);
         asyncTask.delegate = this;
+        asyncTask.setProcessDialog(getApplicationContext().getString(R.string.progress_dialog_header));
         asyncTask.execute(ServiceHelper.POST_METHOD, asyncTask.getLoginString(), email, password);
     }
 
@@ -133,7 +143,7 @@ public class LoginActivity extends AppCompatActivity implements IUserServiceHelp
 
             String token = resultObject.getString("token");
 
-
+            progressDialog.dismiss();
             session.createLoginSession(email, token);
             Intent i = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(i);
@@ -150,7 +160,6 @@ public class LoginActivity extends AppCompatActivity implements IUserServiceHelp
         Intent myIntent = new Intent(this, RegisterActivity.class);
         startActivity(myIntent);
     }
-
 
 
 }

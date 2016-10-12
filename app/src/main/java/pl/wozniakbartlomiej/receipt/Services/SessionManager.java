@@ -1,9 +1,11 @@
-package pl.wozniakbartlomiej.receipt;
+package pl.wozniakbartlomiej.receipt.Services;
 
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+
+import pl.wozniakbartlomiej.receipt.Activities.LoginActivity;
 
 /**
  * Created by Bartek on 03/10/16.

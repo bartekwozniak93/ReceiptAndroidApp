@@ -1,4 +1,4 @@
-package pl.wozniakbartlomiej.receipt;
+package pl.wozniakbartlomiej.receipt.Services;
 
 import android.content.ContentValues;
 import android.content.Context;

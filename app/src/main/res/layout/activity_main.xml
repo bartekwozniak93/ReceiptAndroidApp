@@ -4,12 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="pl.wozniakbartlomiej.receipt.MainActivity">
+    tools:context=".Activities.MainActivity">
     <fragment
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:id="@+id/fragment"
-        android:name="pl.wozniakbartlomiej.receipt.UserLogOutFragment"
+        android:name="pl.wozniakbartlomiej.receipt.Widgets.UserLogOutFragment"
         android:layout="@layout/fragment_logout"
         tools:layout="@layout/fragment_logout" />
 
@@ -22,4 +22,23 @@
         android:id="@+id/btn_camera"
         android:text="@string/cam"
         />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="onClick_NewEvent"
+        android:id="@+id/btn_event"
+        android:text="@string/btn_newEvent"
+        />
+
+    <fragment
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:name="pl.wozniakbartlomiej.receipt.Widgets.AutoCompleteFragment"
+        android:id="@+id/fragment2"
+        android:layout_gravity="center_horizontal" />
 </LinearLayout>
+
+
+
+
