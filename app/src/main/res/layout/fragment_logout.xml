@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="horizontal"
     android:background="@color/colorBlue"
-    tools:context=".UserLogOutFragment">
+    tools:context=".Widgets.UserLogOutFragment">
 
     <TextView
         android:layout_width="0px"

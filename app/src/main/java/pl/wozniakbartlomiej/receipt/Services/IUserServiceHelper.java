@@ -1,4 +1,4 @@
-package pl.wozniakbartlomiej.receipt;
+package pl.wozniakbartlomiej.receipt.Services;
 
 /**
  * Interface for multiple use of async implementation.

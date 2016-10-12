@@ -1,4 +1,4 @@
-package pl.wozniakbartlomiej.receipt;
+package pl.wozniakbartlomiej.receipt.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +10,12 @@ import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import pl.wozniakbartlomiej.receipt.R;
+import pl.wozniakbartlomiej.receipt.Services.IUserServiceHelper;
+import pl.wozniakbartlomiej.receipt.Services.ServiceHelper;
+import pl.wozniakbartlomiej.receipt.Services.SessionManager;
+import pl.wozniakbartlomiej.receipt.Services.UserServiceHelper;
 
 public class RegisterActivity extends AppCompatActivity implements IUserServiceHelper {
 
@@ -37,6 +43,7 @@ public class RegisterActivity extends AppCompatActivity implements IUserServiceH
         //Execute async method for register.
         asyncTask =new UserServiceHelper(RegisterActivity.this);
         asyncTask.delegate = this;
+        asyncTask.setProcessDialog(getApplicationContext().getString(R.string.progress_dialog_header));
         asyncTask.execute(ServiceHelper.POST_METHOD, asyncTask.getUserString(), getUserEmailFromView(), getUserPasswordFromView());
     }
 

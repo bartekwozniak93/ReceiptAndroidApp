@@ -1,11 +1,16 @@
-package pl.wozniakbartlomiej.receipt;
+package pl.wozniakbartlomiej.receipt.Services;
 
+import android.content.Context;
 import android.util.Log;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
@@ -23,6 +28,11 @@ public class ServiceHelper {
 
     public static String POST_METHOD = "POST";
     public static String GET_METHOD = "GET";
+    private SessionManager session;
+
+    public ServiceHelper(Context context){
+        this.session = new SessionManager(context);
+    }
 
     /**
      * The following code getPostDataString is from
@@ -81,7 +91,7 @@ public class ServiceHelper {
             OutputStream streamm = httpURLConnection.getOutputStream();
             BufferedWriter writer = new BufferedWriter(
                     new OutputStreamWriter(streamm, "UTF-8"));
-            writer.write(new ServiceHelper().getPostDataString(postDataParams));
+            writer.write(getPostDataString(postDataParams));
             writer.flush();
             writer.close();
             streamm.close();
@@ -106,5 +116,51 @@ public class ServiceHelper {
             it.remove();
         }
         return postDataParams;
+    }
+
+    /**
+     * Get result from service for authorization methods
+     * as a JSON object.
+     */
+    public String getJSON(String requestMethod, String url, HashMap<String, String> requestParameters) {
+        URL serviceUrl = convertToUrl(url);
+        HttpURLConnection httpURLConnection = null;
+        int responseCode = -1;
+        StringBuilder stringBuilder = new StringBuilder();
+        try {
+            //Prepare Request Before Send
+            httpURLConnection = (HttpURLConnection) serviceUrl.openConnection();
+            httpURLConnection.setRequestMethod(requestMethod);
+            httpURLConnection.setRequestProperty("Authorization", getAuthorizationToken());
+            httpURLConnection.addRequestProperty("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
+            //Add parameters to Request Body.
+            ServiceHelper.addParamsToRequestBody(httpURLConnection, requestParameters);
+            //Send request
+            httpURLConnection.connect();
+            responseCode = httpURLConnection.getResponseCode();
+            if (responseCode == httpURLConnection.HTTP_OK) {
+                InputStream inputStream = httpURLConnection.getInputStream();
+                BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    stringBuilder.append(line);
+                }
+                inputStream.close();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            httpURLConnection.disconnect();
+        }
+
+        return stringBuilder.toString();
+    }
+
+    /**
+     * Return token of the user
+     */
+    public String getAuthorizationToken() {
+        String jwtToken = session.getProperty(SessionManager.SessionKey.TOKEN);
+        return jwtToken;
     }
 }
