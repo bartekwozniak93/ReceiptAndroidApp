@@ -1,5 +1,6 @@
 package pl.wozniakbartlomiej.receipt.Activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -11,7 +12,7 @@ import pl.wozniakbartlomiej.receipt.Services.EventServiceHelper;
 import pl.wozniakbartlomiej.receipt.Services.IUserServiceHelper;
 import pl.wozniakbartlomiej.receipt.Services.ServiceHelper;
 
-public class EventActivity extends AppCompatActivity implements IUserServiceHelper {
+public class AddEventActivity extends AppCompatActivity implements IUserServiceHelper {
 
     private EventServiceHelper asyncTask;
 
@@ -21,29 +22,30 @@ public class EventActivity extends AppCompatActivity implements IUserServiceHelp
         setContentView(R.layout.activity_event);
     }
 
+    public void onClick_AddEvent(View view) {
+        //Execute async method for add event.
+        asyncTask =new EventServiceHelper(AddEventActivity.this);
+        asyncTask.delegate = this;
+        asyncTask.setProcessDialog(getApplicationContext().getString(R.string.progress_dialog_header));
+        asyncTask.execute(ServiceHelper.POST_METHOD, asyncTask.getPostEventString(), getTitleFromView(), getDescriptionFromView());
+    }
 
-
+    /**
+     * Callback for add event method.
+     */
     @Override
     public void userServiceProcess(String result) {
         try {
-            //retrieveUserInformationFromJSON(result);
-            ////Redirect to MainActivity
-            //Intent i = new Intent(getApplicationContext(), MainActivity.class);
-            //startActivity(i);
-            //finish();
+            ////Redirect to EventsActivity
+            Intent i = new Intent(getApplicationContext(), EventsActivity.class);
+            startActivity(i);
+            finish();
         }
         catch(Exception e){
             Log.d("RegisterActivity", e.getMessage());
         }
     }
 
-    public void onClick_AddEvent(View view) {
-        //Execute async method for register.
-        asyncTask =new EventServiceHelper(EventActivity.this);
-        asyncTask.delegate = this;
-        asyncTask.setProcessDialog(getApplicationContext().getString(R.string.progress_dialog_header));
-        asyncTask.execute(ServiceHelper.POST_METHOD, asyncTask.getPostEventString(), getTitleFromView(), getDescriptionFromView());
-    }
 
     /**
      * Get Title From View

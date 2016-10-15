@@ -86,6 +86,8 @@ public class ServiceHelper {
      * http://fancifulandroid.blogspot.sg/2013/07/android-convert-string-to-valid-url.html
      */
     public static void addParamsToRequestBody(HttpURLConnection httpURLConnection, HashMap<String, String> values) {
+        if(values == null || values.isEmpty())
+            return;
         try {
             JSONObject postDataParams = putValuesIntoJSON(values);
             OutputStream streamm = httpURLConnection.getOutputStream();
@@ -96,7 +98,7 @@ public class ServiceHelper {
             writer.close();
             streamm.close();
         } catch (Exception e) {
-            Log.d("UserServiceHelper", e.getMessage());
+            Log.d("ServiceHelper", e.getMessage());
         }
     }
 
@@ -111,7 +113,7 @@ public class ServiceHelper {
             try {
                 postDataParams.put(pair.getKey().toString(), pair.getValue().toString());
             } catch (JSONException e) {
-                Log.d("UserServiceHelper", e.getMessage());
+                Log.d("ServiceHelper", e.getMessage());
             }
             it.remove();
         }

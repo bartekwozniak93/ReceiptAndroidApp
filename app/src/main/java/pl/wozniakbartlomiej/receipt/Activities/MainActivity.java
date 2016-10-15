@@ -25,7 +25,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onClick_NewEvent(View view){
-        Intent i = new Intent(this, EventActivity.class);
+        Intent i = new Intent(this, AddEventActivity.class);
+        startActivity(i);
+    }
+
+    public void onClick_GetEvents(View view){
+        Intent i = new Intent(this, EventsActivity.class);
         startActivity(i);
     }
 

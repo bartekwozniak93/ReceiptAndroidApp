@@ -53,7 +53,7 @@ public class AutoCompleteUsersAdapter extends BaseAdapter implements Filterable 
         return position;
     }
 
-    @Override
+
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) mContext

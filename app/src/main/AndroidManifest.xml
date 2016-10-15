@@ -40,7 +40,8 @@
         <activity android:name=".Activities.RegisterActivity" />
         <activity android:name=".Activities.LoginActivity" />
         <activity android:name=".Activities.CameraActivity" />
-        <activity android:name=".Activities.EventActivity"></activity>
+        <activity android:name=".Activities.AddEventActivity" />
+        <activity android:name=".Activities.EventsActivity"></activity>
     </application>
 
 </manifest>

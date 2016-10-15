@@ -41,7 +41,10 @@ public class UserServiceHelper extends AsyncTask<String, Void, String> {
     protected String doInBackground(String... params) {
         String requestMethod = params[0];
         String url = params[1];
-        HashMap<String, String> requestParameters = prepareRequestParams(params);
+        HashMap<String, String> requestParameters = null;
+        if(requestMethod == ServiceHelper.POST_METHOD) {
+            requestParameters = prepareRequestParams(params);
+        }
         return new ServiceHelper(applicationContext).getJSON(requestMethod, url, requestParameters);
     }
 
@@ -54,6 +57,9 @@ public class UserServiceHelper extends AsyncTask<String, Void, String> {
         return requestParameters;
     }
 
+    /**
+     * Handle post execute async task.
+     */
     @Override
     public void onPostExecute(String result) {
         //close progress dialog before executing

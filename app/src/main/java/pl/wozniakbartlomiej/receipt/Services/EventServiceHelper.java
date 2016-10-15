@@ -35,8 +35,10 @@ public class EventServiceHelper  extends AsyncTask<String, Void, String> {
     }
 
 
+    /**
+     * Initialize progress dialog with given title.
+     */
     public void setProcessDialog(String title) {
-        //initialize progress dialog
         progressDialog=ProgressDialog.show(applicationContext,"",title,false);
     }
 
@@ -44,23 +46,30 @@ public class EventServiceHelper  extends AsyncTask<String, Void, String> {
     protected String doInBackground(String... params) {
         String requestMethod = params[0];
         String url = params[1];
-        HashMap<String, String> requestParameters = prepareRequestParams(params);
+        HashMap<String, String> requestParameters = null;
+        if(requestMethod == ServiceHelper.POST_METHOD) {
+            requestParameters = prepareRequestParams(params);
+        }
         return new ServiceHelper(applicationContext).getJSON(requestMethod, url, requestParameters);
     }
 
+    /**
+     * Prepare request parameters for new event.
+     */
     private HashMap<String, String> prepareRequestParams(String... params){
         String title = params[2];
         String description = params[3];
         HashMap<String, String> requestParameters = new HashMap<>();
         requestParameters.put(PARAMS_TITLE, title);
         requestParameters.put(PARAMS_DESCRIPTION, description);
-        Time time = new Time();
-        time.setToNow();
-        requestParameters.put(PARAMS_DATE, time.toString());
+        requestParameters.put(PARAMS_DATE, getCurrentDate());
         requestParameters.put(PARAMS_USER, session.getProperty(SessionManager.SessionKey.EMAIL));
         return requestParameters;
     }
 
+    /**
+     * Handle post execute async task.
+    */
     @Override
     public void onPostExecute(String result) {
         //close progress dialog before executing
@@ -72,13 +81,22 @@ public class EventServiceHelper  extends AsyncTask<String, Void, String> {
     }
 
     /**
-     * Return link for login.
+     * Return link for posting new event.
      */
     public String getPostEventString() {
         return api_link + applicationResources.getString(R.string.api_post_event);
     }
 
+    /**
+     * Return link for getting user's events.
+     */
+    public String getUserEventsString() {
+        return api_link + applicationResources.getString(R.string.api_get_events);
+    }
 
-
-
+    private String getCurrentDate(){
+        Time time = new Time();
+        time.setToNow();
+        return time.toString();
+    }
 }
