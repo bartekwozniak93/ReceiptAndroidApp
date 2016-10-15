@@ -34,9 +34,15 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+<<<<<<< HEAD
         android:onClick="onClick_GetEvents"
         android:id="@+id/btn_user_events"
         android:text="@string/btn_getEvents"
+=======
+        android:onClick="onClick_User"
+        android:id="@+id/btn_user"
+        android:text="New User"
+>>>>>>> 4f2c55e727a1b3039601733772e44e2c637ce412
         />
 
     <fragment

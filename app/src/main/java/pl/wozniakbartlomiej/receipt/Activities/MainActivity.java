@@ -34,6 +34,11 @@ public class MainActivity extends AppCompatActivity {
         startActivity(i);
     }
 
+    public void onClick_User(View view){
+        Intent i = new Intent(this, ItemActivity.class);
+        startActivity(i);
+    }
+
     /**
      * Init session for checking users permissions.
      */

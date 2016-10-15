@@ -18,6 +18,9 @@
     <string name="api_post_event">/api/event</string>
     <string name="cam">Go to Camera</string>
     <string name="api_users_find">/api/local/find</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
 
 
