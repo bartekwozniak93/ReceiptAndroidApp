@@ -41,7 +41,7 @@
         <activity android:name=".Activities.LoginActivity" />
         <activity android:name=".Activities.CameraActivity" />
         <activity android:name=".Activities.AddEventActivity" />
-        <activity android:name=".Activities.EventsActivity"></activity>
+        <activity android:name=".Activities.EventActivity"></activity>
     </application>
 
 </manifest>

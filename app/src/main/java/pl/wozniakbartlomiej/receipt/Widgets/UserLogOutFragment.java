@@ -14,7 +14,7 @@ import android.widget.TextView;
 import com.facebook.login.LoginManager;
 
 import pl.wozniakbartlomiej.receipt.R;
-import pl.wozniakbartlomiej.receipt.Services.SessionManager;
+import pl.wozniakbartlomiej.receipt.Services.UserSessionManager;
 
 /**
  * Fragment for user loggout button
@@ -22,7 +22,7 @@ import pl.wozniakbartlomiej.receipt.Services.SessionManager;
  */
 public class UserLogOutFragment extends Fragment {
 
-    private SessionManager session;
+    private UserSessionManager session;
     private View view;
 
     public UserLogOutFragment() {
@@ -36,7 +36,7 @@ public class UserLogOutFragment extends Fragment {
         //Initialize fragment to find its elements.
         view = inflater.inflate(R.layout.fragment_logout, container, false);
         //Initialize session to get user information.
-        session = new SessionManager(getActivity().getApplicationContext());
+        session = new UserSessionManager(getActivity().getApplicationContext());
 
         setInfoAboutLoggedUser();
         addButtonListnerForLogOut();
@@ -50,7 +50,7 @@ public class UserLogOutFragment extends Fragment {
      */
     private void setInfoAboutLoggedUser(){
         String loggedAsText = getContext().getString(R.string.textview_logged_as);
-        String userEmail = session.getProperty(SessionManager.SessionKey.EMAIL);
+        String userEmail = session.getProperty(UserSessionManager.SessionKey.EMAIL);
         TextView textView_LoggedAs = (TextView) view.findViewById(R.id.textView_LoggedAs);
         textView_LoggedAs.setText(loggedAsText+" "+userEmail);
     }

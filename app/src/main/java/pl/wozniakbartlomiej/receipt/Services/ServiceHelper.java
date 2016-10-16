@@ -28,10 +28,10 @@ public class ServiceHelper {
 
     public static String POST_METHOD = "POST";
     public static String GET_METHOD = "GET";
-    private SessionManager session;
+    private UserSessionManager session;
 
     public ServiceHelper(Context context){
-        this.session = new SessionManager(context);
+        this.session = new UserSessionManager(context);
     }
 
     /**
@@ -40,22 +40,17 @@ public class ServiceHelper {
      * Add params JSONObject to POST Request.
      */
     public static String getPostDataString(JSONObject params) throws Exception {
-
         StringBuilder result = new StringBuilder();
         boolean first = true;
 
         Iterator<String> itr = params.keys();
-
         while (itr.hasNext()) {
-
             String key = itr.next();
             Object value = params.get(key);
-
             if (first)
                 first = false;
             else
                 result.append("&");
-
             result.append(URLEncoder.encode(key, "UTF-8"));
             result.append("=");
             result.append(URLEncoder.encode(value.toString(), "UTF-8"));
@@ -162,7 +157,7 @@ public class ServiceHelper {
      * Return token of the user
      */
     public String getAuthorizationToken() {
-        String jwtToken = session.getProperty(SessionManager.SessionKey.TOKEN);
+        String jwtToken = session.getProperty(UserSessionManager.SessionKey.TOKEN);
         return jwtToken;
     }
 }

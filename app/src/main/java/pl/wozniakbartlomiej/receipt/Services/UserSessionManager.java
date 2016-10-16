@@ -9,8 +9,10 @@ import pl.wozniakbartlomiej.receipt.Activities.LoginActivity;
 
 /**
  * Created by Bartek on 03/10/16.
+ * Store user login data in app session
+ * using SharedPreferences.
  */
-public class SessionManager {
+public class UserSessionManager {
 
     SharedPreferences pref;
     Editor editor;
@@ -18,6 +20,7 @@ public class SessionManager {
     int PRIVATE_MODE = 0;
     static final String PREF_NAME = "ApplicationPreferences";
     static final String TOKEN_PREFIX = "JWT ";
+
     /**
      * Enum keys for properties.
      * */
@@ -27,7 +30,7 @@ public class SessionManager {
         EMAIL
     }
 
-    public SessionManager(Context context){
+    public UserSessionManager(Context context){
         this._context = context;
         pref = _context.getSharedPreferences(PREF_NAME, PRIVATE_MODE);
         editor = pref.edit();
@@ -74,13 +77,17 @@ public class SessionManager {
         editor.clear();
         editor.commit();
         // After logout redirect user to Loing Activity
-        Intent i = new Intent(_context, LoginActivity.class);
+        goToLoginActivity();
+    }
+
+    private void goToLoginActivity(){
+        Intent intent = new Intent(_context, LoginActivity.class);
         // Closing all the Activities
-        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         // Add new Flag to start new Activity
-        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         // Staring Login Activity
-        _context.startActivity(i);
+        _context.startActivity(intent);
     }
 
     /**

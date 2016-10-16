@@ -58,7 +58,7 @@ public class AutoCompleteUsersAdapter extends BaseAdapter implements Filterable 
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) mContext
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.simple_dropdown_item_2line, parent, false);
+            convertView = inflater.inflate(R.layout.layout_dropdown_list_item, parent, false);
         }
         ((TextView) convertView.findViewById(R.id.text1)).setText(getItem(position));
         ((TextView) convertView.findViewById(R.id.text2)).setText(getItem(position));

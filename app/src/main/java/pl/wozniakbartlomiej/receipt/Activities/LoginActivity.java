@@ -17,23 +17,24 @@ import com.facebook.GraphResponse;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Arrays;
 
 import pl.wozniakbartlomiej.receipt.R;
 import pl.wozniakbartlomiej.receipt.Services.ServiceHelper;
-import pl.wozniakbartlomiej.receipt.Services.IUserServiceHelper;
+import pl.wozniakbartlomiej.receipt.Services.IServiceHelper;
 import pl.wozniakbartlomiej.receipt.Services.UserServiceHelper;
-import pl.wozniakbartlomiej.receipt.Services.SessionManager;
+import pl.wozniakbartlomiej.receipt.Services.UserSessionManager;
 
-public class LoginActivity extends AppCompatActivity implements IUserServiceHelper {
+public class LoginActivity extends AppCompatActivity implements IServiceHelper {
 
     //Button for facebook login
     private LoginButton loginFacebookButton;
     private CallbackManager callbackManager;
     private UserServiceHelper asyncTask;
-    private SessionManager session;
+    private UserSessionManager session;
     public ProgressDialog progressDialog;
 
     @Override
@@ -44,7 +45,7 @@ public class LoginActivity extends AppCompatActivity implements IUserServiceHelp
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        session = new SessionManager(getApplicationContext());
+        session = new UserSessionManager(getApplicationContext());
 
         //Add callback to Facebook button.
         loginFacebookButton = (LoginButton) findViewById(R.id.login_button);
@@ -111,17 +112,32 @@ public class LoginActivity extends AppCompatActivity implements IUserServiceHelp
      * User login.
      */
     public void onClick_Login(View view) {
-        //Retrive string for email.
-        EditText editText_Email = (EditText) findViewById(R.id.editText_Email);
-        String email = editText_Email.getText().toString().toLowerCase();
-        //Retrive string for password.
-        EditText editText_Password = (EditText) findViewById(R.id.editText_Password);
-        String password = editText_Password.getText().toString().toLowerCase();
         //Execute async method for login.
         asyncTask = new UserServiceHelper(LoginActivity.this);
         asyncTask.delegate = this;
         asyncTask.setProcessDialog(getApplicationContext().getString(R.string.progress_dialog_header));
-        asyncTask.execute(ServiceHelper.POST_METHOD, asyncTask.getLoginString(), email, password);
+        asyncTask.execute(ServiceHelper.POST_METHOD, asyncTask.getLoginString(), getUserEmailFromView(), getUserPasswordFromView());
+    }
+
+    /**
+     * Get User Email From View
+     */
+    private String getUserEmailFromView()
+    {
+        //Retrieve string for email.
+        EditText editText_Email = (EditText) findViewById(R.id.editText_Email);
+        String email = editText_Email.getText().toString().toLowerCase();
+        return email;
+    }
+
+    /**
+     * Get User Password From View
+     */
+    private String getUserPasswordFromView() {
+        //Retrieve string for password.
+        EditText editText_Password = (EditText) findViewById(R.id.editText_Password);
+        String password = editText_Password.getText().toString().toLowerCase();
+        return password;
     }
 
     /**
@@ -130,21 +146,8 @@ public class LoginActivity extends AppCompatActivity implements IUserServiceHelp
     @Override
     public void userServiceProcess(String result) {
         try {
-            JSONObject resultObject = new JSONObject(result);
-            JSONObject userObject = resultObject.getJSONObject("user");
-            String email;
-            if (!userObject.isNull("local")) {
-                JSONObject localUserObject = userObject.getJSONObject("local");
-                email = localUserObject.getString("email");
-            } else {
-                JSONObject localUserObject = userObject.getJSONObject("facebook");
-                email = localUserObject.getString("email");
-            }
-
-            String token = resultObject.getString("token");
-
             progressDialog.dismiss();
-            session.createLoginSession(email, token);
+            session.createLoginSession(retriveUserEmailFromJSON(result), retriveUserTokenFromJSON(result));
             Intent i = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(i);
             finish();
@@ -154,7 +157,34 @@ public class LoginActivity extends AppCompatActivity implements IUserServiceHelp
     }
 
     /**
-     * User registration.
+     * Retrive user's email from JSON.
+     */
+    private String retriveUserEmailFromJSON(String result) throws JSONException {
+        String email;
+        JSONObject resultObject = new JSONObject(result);
+        JSONObject userObject = resultObject.getJSONObject("user");
+        if (!userObject.isNull("local")) {
+            JSONObject localUserObject = userObject.getJSONObject("local");
+            email = localUserObject.getString("email");
+        } else {
+            JSONObject localUserObject = userObject.getJSONObject("facebook");
+            email = localUserObject.getString("email");
+        }
+        return email;
+    }
+
+    /**
+     * Retrive user's token from JSON.
+     */
+    private String retriveUserTokenFromJSON(String result) throws JSONException {
+        String token;
+        JSONObject resultObject = new JSONObject(result);
+        token = resultObject.getString("token");
+        return token;
+    }
+
+    /**
+     * Go to user registration Activity.
      */
     public void onClick_Register(View view) {
         Intent myIntent = new Intent(this, RegisterActivity.class);

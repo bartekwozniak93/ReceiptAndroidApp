@@ -10,7 +10,8 @@ import java.util.HashMap;
 import pl.wozniakbartlomiej.receipt.R;
 
 /**
- * Helper for REST Service.
+ * Helper for REST Service for user's methods
+ * such as for login, logout etc.
  */
 public class UserServiceHelper extends AsyncTask<String, Void, String> {
 
@@ -19,7 +20,7 @@ public class UserServiceHelper extends AsyncTask<String, Void, String> {
 
    private ProgressDialog progressDialog;
 
-   public IUserServiceHelper delegate;
+   public IServiceHelper delegate;
    private Context applicationContext;
    private Resources applicationResources;
    private String api_link;

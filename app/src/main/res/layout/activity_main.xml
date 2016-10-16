@@ -5,16 +5,16 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".Activities.MainActivity">
+
     <fragment
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
         android:id="@+id/fragment"
         android:name="pl.wozniakbartlomiej.receipt.Widgets.UserLogOutFragment"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
         android:layout="@layout/fragment_logout"
         tools:layout="@layout/fragment_logout" />
 
     <!--testing camera from login directly.
-    -->
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -22,29 +22,24 @@
         android:id="@+id/btn_camera"
         android:text="@string/cam"
         />
+    -->
 
     <Button
+        android:id="@+id/btn_event"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="onClick_NewEvent"
-        android:id="@+id/btn_event"
-        android:text="@string/btn_newEvent"
-        />
+        android:text="@string/btn_newEvent" />
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="onClick_GetEvents"
-        android:id="@+id/btn_user_events"
-        android:text="@string/btn_getEvents"
-        />
 
     <fragment
+        android:id="@+id/fragment1"
+        android:name="pl.wozniakbartlomiej.receipt.Widgets.EventsFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:name="pl.wozniakbartlomiej.receipt.Widgets.AutoCompleteFragment"
-        android:id="@+id/fragment2"
         android:layout_gravity="center_horizontal" />
+
+
 </LinearLayout>
 
 

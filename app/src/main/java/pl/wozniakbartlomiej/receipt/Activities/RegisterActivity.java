@@ -12,15 +12,15 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import pl.wozniakbartlomiej.receipt.R;
-import pl.wozniakbartlomiej.receipt.Services.IUserServiceHelper;
+import pl.wozniakbartlomiej.receipt.Services.IServiceHelper;
 import pl.wozniakbartlomiej.receipt.Services.ServiceHelper;
-import pl.wozniakbartlomiej.receipt.Services.SessionManager;
+import pl.wozniakbartlomiej.receipt.Services.UserSessionManager;
 import pl.wozniakbartlomiej.receipt.Services.UserServiceHelper;
 
-public class RegisterActivity extends AppCompatActivity implements IUserServiceHelper {
+public class RegisterActivity extends AppCompatActivity implements IServiceHelper {
 
     private UserServiceHelper asyncTask;
-    private SessionManager session;
+    private UserSessionManager session;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +33,7 @@ public class RegisterActivity extends AppCompatActivity implements IUserServiceH
      * Init session for checking users permissions.
      */
     private void initSession(){
-        session = new SessionManager(getApplicationContext());
+        session = new UserSessionManager(getApplicationContext());
     }
 
     /**

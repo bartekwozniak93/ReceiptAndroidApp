@@ -9,17 +9,17 @@ import android.widget.EditText;
 
 import pl.wozniakbartlomiej.receipt.R;
 import pl.wozniakbartlomiej.receipt.Services.EventServiceHelper;
-import pl.wozniakbartlomiej.receipt.Services.IUserServiceHelper;
+import pl.wozniakbartlomiej.receipt.Services.IServiceHelper;
 import pl.wozniakbartlomiej.receipt.Services.ServiceHelper;
 
-public class AddEventActivity extends AppCompatActivity implements IUserServiceHelper {
+public class AddEventActivity extends AppCompatActivity implements IServiceHelper {
 
     private EventServiceHelper asyncTask;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_event);
+        setContentView(R.layout.activity_add_event);
     }
 
     public void onClick_AddEvent(View view) {
@@ -37,7 +37,7 @@ public class AddEventActivity extends AppCompatActivity implements IUserServiceH
     public void userServiceProcess(String result) {
         try {
             ////Redirect to EventsActivity
-            Intent i = new Intent(getApplicationContext(), EventsActivity.class);
+            Intent i = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(i);
             finish();
         }

@@ -11,7 +11,8 @@ import java.util.HashMap;
 import pl.wozniakbartlomiej.receipt.R;
 
 /**
- * Created by Bartek on 10/10/16.
+ * Helper for REST Service for event's methods
+ * such as for ass new event, add users to event etx.
  */
 public class EventServiceHelper  extends AsyncTask<String, Void, String> {
 
@@ -21,17 +22,17 @@ public class EventServiceHelper  extends AsyncTask<String, Void, String> {
     public static String PARAMS_USER = "user";
 
     private ProgressDialog progressDialog;
-    public IUserServiceHelper delegate;
+    public IServiceHelper delegate;
     private Context applicationContext;
     private Resources applicationResources;
     private String api_link;
-    private SessionManager session;
+    private UserSessionManager session;
 
     public EventServiceHelper(Context context) {
         this.applicationContext = context;
         this.applicationResources = context.getResources();
         this.api_link = applicationResources.getString(R.string.api_link);
-        this.session = new SessionManager(context);
+        this.session = new UserSessionManager(context);
     }
 
 
@@ -63,7 +64,7 @@ public class EventServiceHelper  extends AsyncTask<String, Void, String> {
         requestParameters.put(PARAMS_TITLE, title);
         requestParameters.put(PARAMS_DESCRIPTION, description);
         requestParameters.put(PARAMS_DATE, getCurrentDate());
-        requestParameters.put(PARAMS_USER, session.getProperty(SessionManager.SessionKey.EMAIL));
+        requestParameters.put(PARAMS_USER, session.getProperty(UserSessionManager.SessionKey.EMAIL));
         return requestParameters;
     }
 
