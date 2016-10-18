@@ -109,7 +109,6 @@ public class AutoCompleteUsersAdapter extends BaseAdapter implements Filterable 
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        // GoogleBooksProtocol is a wrapper for the Google Books API
         return users;
     }
 

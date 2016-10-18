@@ -4,23 +4,39 @@
     android:layout_height="match_parent"
     tools:context="pl.wozniakbartlomiej.receipt.Widgets.AutoCompleteFragment">
 
-    <FrameLayout android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
 
-        <pl.wozniakbartlomiej.receipt.Widgets.AutoCompleteDelayTextView
-            android:id="@+id/et_book_title"
-            android:inputType="textCapSentences"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:imeOptions="flagNoExtractUi|actionSearch"/>
+        <FrameLayout
+            android:layout_weight="3"
+            android:layout_width="0px"
+            android:layout_height="match_parent">
+            <pl.wozniakbartlomiej.receipt.Widgets.AutoCompleteDelayTextView
+                android:id="@+id/autocomplete_addUser"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:imeOptions="flagNoExtractUi|actionSearch"
+                android:inputType="textCapSentences" />
 
-        <ProgressBar
-            android:id="@+id/pb_loading_indicator"
-            style="?android:attr/progressBarStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical|right"
-            android:visibility="gone"/>
-    </FrameLayout>
+            <ProgressBar
+                android:id="@+id/pb_loading_indicator"
+                style="?android:attr/progressBarStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|right"
+                android:visibility="gone" />
+        </FrameLayout>
+
+        <Button
+            android:id="@+id/btn_addUser"
+            android:layout_weight="1"
+            android:layout_width="0px"
+            android:layout_height="match_parent"
+            android:onClick="onClick_addUserToEvent"
+            android:text="Add User" />
+    </LinearLayout>
 
 </FrameLayout>

@@ -50,11 +50,11 @@ public class EventsAdapter extends BaseAdapter {
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
-        final Event currentListData = getItem(position);
+        final Event currentEvent = getItem(position);
         ListViewElement listViewElement;
 
         if (convertView == null) {
-            convertView = inflater.inflate(R.layout.layout_list_item, parent, false);
+            convertView = inflater.inflate(R.layout.layout_list_event_item, parent, false);
             listViewElement = new ListViewElement(convertView);
             convertView.setTag(listViewElement);
         } else {
@@ -67,16 +67,16 @@ public class EventsAdapter extends BaseAdapter {
                 Intent itent = new Intent(context, EventActivity.class);
                 itent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 itent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                itent.putExtra("id", currentListData.getId());
-                itent.putExtra("title", currentListData.getTitle());
-                itent.putExtra("description", currentListData.getDescription());
+                itent.putExtra("id", currentEvent.getId());
+                itent.putExtra("title", currentEvent.getTitle());
+                itent.putExtra("description", currentEvent.getDescription());
                 context.startActivity(itent);
 
             }
         });
-        listViewElement.setTitle(currentListData.getTitle());
-        listViewElement.setDescription(currentListData.getDescription());
-        listViewElement.setIcon(currentListData.getImageId());
+        listViewElement.setTitle(currentEvent.getTitle());
+        listViewElement.setDescription(currentEvent.getDescription());
+        listViewElement.setIcon(currentEvent.getImageId());
 
         return convertView;
     }

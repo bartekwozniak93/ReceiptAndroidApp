@@ -7,12 +7,27 @@
     tools:context="pl.wozniakbartlomiej.receipt.Activities.EventActivity">
 
 
-    <TextView
+
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/textView_Title" />
-    <TextView
+        android:id="@+id/frameAutoCompleteLayout"
+        android:layout_gravity="center_horizontal" />
+
+    <FrameLayout
+        android:id="@+id/frameAddedUsersLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView_Description" />
+        android:layout_height="200px"/>
+
+    <TextView
+        android:id="@+id/textView_Title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/textView_Description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
 </LinearLayout>

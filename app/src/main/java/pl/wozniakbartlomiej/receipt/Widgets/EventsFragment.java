@@ -56,7 +56,7 @@ public class EventsFragment extends Fragment implements IServiceHelper {
      * Assign view elements.
      */
     private void assignViewElements(View view) {
-        listView = (ListView) view.findViewById(R.id.lvCustomList);
+        listView = (ListView) view.findViewById(R.id.userEventsList);
     }
 
     /**

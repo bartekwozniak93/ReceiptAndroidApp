@@ -16,6 +16,8 @@
     <string name="api_facebook">/api/facebook/login</string>
     <string name="api_get_events">/api/event</string>
     <string name="api_post_event">/api/event</string>
+    <string name="api_post_add_user_event">/api/event/adduser</string>
+    <string name="api_get_event">/api/getevent</string>
     <string name="cam">Go to Camera</string>
     <string name="api_users_find">/api/local/find</string>
 

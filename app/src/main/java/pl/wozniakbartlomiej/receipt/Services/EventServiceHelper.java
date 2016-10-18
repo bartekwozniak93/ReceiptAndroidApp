@@ -20,6 +20,8 @@ public class EventServiceHelper  extends AsyncTask<String, Void, String> {
     public static String PARAMS_DATE = "date";
     public static String PARAMS_DESCRIPTION = "description";
     public static String PARAMS_USER = "user";
+    public static String PARAMS_EVENT_ID = "eventId";
+    public static String PARAMS_USER_TO_ADD = "userToAdd";
 
     private ProgressDialog progressDialog;
     public IServiceHelper delegate;
@@ -58,14 +60,28 @@ public class EventServiceHelper  extends AsyncTask<String, Void, String> {
      * Prepare request parameters for new event.
      */
     private HashMap<String, String> prepareRequestParams(String... params){
-        String title = params[2];
-        String description = params[3];
+        String title = getParam(2, params);
+        String description = getParam(3, params);
+        String eventId = getParam(4, params);
+        String userEmail = getParam(5, params);
         HashMap<String, String> requestParameters = new HashMap<>();
         requestParameters.put(PARAMS_TITLE, title);
         requestParameters.put(PARAMS_DESCRIPTION, description);
         requestParameters.put(PARAMS_DATE, getCurrentDate());
+        requestParameters.put(PARAMS_EVENT_ID, eventId);
+        requestParameters.put(PARAMS_USER_TO_ADD, userEmail);
         requestParameters.put(PARAMS_USER, session.getProperty(UserSessionManager.SessionKey.EMAIL));
         return requestParameters;
+    }
+
+    /**
+     * Get parameters from param by given i.
+     */
+    private String getParam(int i,String... params){
+        if(params.length>i)
+            return params[i];
+        else
+            return "";
     }
 
     /**
@@ -94,6 +110,22 @@ public class EventServiceHelper  extends AsyncTask<String, Void, String> {
     public String getUserEventsString() {
         return api_link + applicationResources.getString(R.string.api_get_events);
     }
+
+    /**
+     * Return link for getting user event with siven id..
+     */
+    public String getEventString() {
+        return api_link + applicationResources.getString(R.string.api_get_event);
+    }
+
+    /**
+     * Return link for adding user to event.
+     */
+    public String getAddUserToEventString() {
+        return api_link + applicationResources.getString(R.string.api_post_add_user_event);
+    }
+
+
 
     private String getCurrentDate(){
         Time time = new Time();

@@ -2,10 +2,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="pl.wozniakbartlomiej.receipt.Widgets.EventsFragment">
+    tools:context="pl.wozniakbartlomiej.receipt.Widgets.UsersFragment">
 
     <ListView
-        android:id="@+id/userEventsList"
+        android:id="@+id/eventUsersList"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

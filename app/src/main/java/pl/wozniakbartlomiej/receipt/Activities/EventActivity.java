@@ -1,10 +1,15 @@
 package pl.wozniakbartlomiej.receipt.Activities;
 
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
 import pl.wozniakbartlomiej.receipt.R;
+import pl.wozniakbartlomiej.receipt.Widgets.AutoCompleteFragment;
+import pl.wozniakbartlomiej.receipt.Widgets.UsersFragment;
 
 public class EventActivity extends AppCompatActivity {
 
@@ -13,6 +18,7 @@ public class EventActivity extends AppCompatActivity {
     private String eventDescription;
     private TextView textView_Title;
     private TextView textView_Description;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,6 +26,51 @@ public class EventActivity extends AppCompatActivity {
         getExtrasFromIntent();
         assignViewElements();
         setTextToViewElements();
+        addFragmentsToView();
+    }
+
+    /**
+     * Add fragments to View.
+     */
+    private void addFragmentsToView(){
+        addAddedUsersFragment();
+        addAutoCompleteFragment();
+    }
+
+    /**
+     * Check if there's already UsersFragment added.
+     * If not, add.
+     */
+    private void addAddedUsersFragment(){
+        if (findViewById(R.id.frameAddedUsersLayout) != null) {
+            FragmentManager fragmentManager = getFragmentManager();
+            FragmentTransaction fragmentTransaction;
+            fragmentTransaction = fragmentManager.beginTransaction();
+            Fragment fragment = new UsersFragment();
+            Bundle bundle = new Bundle();
+            bundle.putString("eventId", eventId);
+            fragment.setArguments(bundle);
+            fragmentTransaction.add(R.id.frameAddedUsersLayout, fragment);
+            fragmentTransaction.commit();
+        }
+    }
+
+    /**
+     * Check if there's already AutoCompleteFragment added.
+     * If not, add.
+     */
+    private void addAutoCompleteFragment(){
+        if (findViewById(R.id.frameAutoCompleteLayout) != null) {
+            FragmentManager fragmentManager = getFragmentManager();
+            FragmentTransaction fragmentTransaction;
+            fragmentTransaction = fragmentManager.beginTransaction();
+            Fragment fragment = new AutoCompleteFragment();
+            Bundle bundle = new Bundle();
+            bundle.putString("eventId", eventId);
+            fragment.setArguments(bundle);
+            fragmentTransaction.add(R.id.frameAutoCompleteLayout, fragment);
+            fragmentTransaction.commit();
+        }
     }
 
     /**

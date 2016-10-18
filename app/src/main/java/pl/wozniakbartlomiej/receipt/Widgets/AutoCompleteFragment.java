@@ -7,15 +7,23 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 
 import pl.wozniakbartlomiej.receipt.R;
+import pl.wozniakbartlomiej.receipt.Services.EventServiceHelper;
+import pl.wozniakbartlomiej.receipt.Services.IServiceHelper;
+import pl.wozniakbartlomiej.receipt.Services.ServiceHelper;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class AutoCompleteFragment extends Fragment {
+public class AutoCompleteFragment extends Fragment implements IServiceHelper {
 
-    private AutoCompleteDelayTextView bookTitle;
+    private AutoCompleteDelayTextView autoCompleteUser;
+    private Button btn_addUser;
+    private String eventId;
+
+    private EventServiceHelper asyncTask;
 
     public AutoCompleteFragment() {
         // Required empty public constructor
@@ -25,23 +33,67 @@ public class AutoCompleteFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_auto_complete, container, false);
+        assignViewElements(view);
+        getArgumentsFromActivity();
+        initAutoComplete(view);
+        addButtonListnerForLogOut();
+        return view;
+    }
 
-        bookTitle = (AutoCompleteDelayTextView) view.findViewById(R.id.et_book_title);
-        bookTitle.setThreshold(1);
-        bookTitle.setAdapter(new AutoCompleteUsersAdapter(this.getActivity())); // 'this' is Activity instance
-        bookTitle.setLoadingIndicator(
+    /**
+     * Assign view elements.
+     */
+    private void assignViewElements(View view) {
+        autoCompleteUser = (AutoCompleteDelayTextView) view.findViewById(R.id.autocomplete_addUser);
+        btn_addUser = (Button) view.findViewById(R.id.btn_addUser);
+    }
+
+
+    /**
+     * Init autocomplete.
+     */
+    private void initAutoComplete(View view){
+        autoCompleteUser.setThreshold(1);
+        autoCompleteUser.setAdapter(new AutoCompleteUsersAdapter(this.getActivity()));
+        autoCompleteUser.setLoadingIndicator(
                 (android.widget.ProgressBar) view.findViewById(R.id.pb_loading_indicator));
-        bookTitle.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        autoCompleteUser.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                String book = (String) adapterView.getItemAtPosition(position);
-                bookTitle.setText(book);
+                String user = (String) adapterView.getItemAtPosition(position);
+                autoCompleteUser.setText(user);
             }
         });
+    }
 
-        return view;
+    /**
+     * Get arguments from Activity.
+     */
+    private void getArgumentsFromActivity(){
+        eventId = getArguments().getString("eventId");
+    }
+
+    /**
+     * Add listener to button for log out event.
+     */
+    private void addButtonListnerForLogOut(){
+        btn_addUser.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                asyncTask = new EventServiceHelper(getActivity().getApplicationContext());
+                asyncTask.delegate = AutoCompleteFragment.this;
+                asyncTask.execute(ServiceHelper.POST_METHOD, asyncTask.getAddUserToEventString(), "", "", eventId, autoCompleteUser.getText().toString());
+            }
+        });
+    }
+
+    /**
+     * Handle callbck for async method to get user's events.
+     */
+    @Override
+    public void userServiceProcess(String result) {
+        //extractJson(result);
+        //listView.setAdapter(new UsersAdapter(getActivity().getApplicationContext(), usersList));
     }
 }
 
