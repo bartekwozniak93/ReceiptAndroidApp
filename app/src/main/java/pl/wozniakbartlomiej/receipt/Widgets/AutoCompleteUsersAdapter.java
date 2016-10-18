@@ -32,10 +32,13 @@ public class AutoCompleteUsersAdapter extends BaseAdapter implements Filterable 
     private Context mContext;
     private List<String> resultList = new ArrayList<String>();
     private UserServiceHelper asyncTask;
-    List<String> users;
-    public AutoCompleteUsersAdapter(Context context) {
-        mContext = context;
-        users = new ArrayList<String>();
+    private List<String> users;
+    private String eventId;
+
+    public AutoCompleteUsersAdapter(Context context, String eventId) {
+        this.mContext = context;
+        this.users = new ArrayList<String>();
+        this.eventId = eventId;
     }
 
     @Override
@@ -101,7 +104,7 @@ public class AutoCompleteUsersAdapter extends BaseAdapter implements Filterable 
         asyncTask =new UserServiceHelper(context);
         users.clear();
         try {
-            retrieveUserInformationFromJSON(asyncTask.execute(ServiceHelper.POST_METHOD, asyncTask.getUserFindString(), userValue, "").get());
+            retrieveUserInformationFromJSON(asyncTask.execute(ServiceHelper.POST_METHOD, asyncTask.getUserFindString(), userValue, "", eventId).get());
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {

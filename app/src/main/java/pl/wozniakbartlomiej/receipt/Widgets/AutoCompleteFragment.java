@@ -22,13 +22,11 @@ public class AutoCompleteFragment extends Fragment implements IServiceHelper {
     private AutoCompleteDelayTextView autoCompleteUser;
     private Button btn_addUser;
     private String eventId;
-
     private EventServiceHelper asyncTask;
 
     public AutoCompleteFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -55,7 +53,7 @@ public class AutoCompleteFragment extends Fragment implements IServiceHelper {
      */
     private void initAutoComplete(View view){
         autoCompleteUser.setThreshold(1);
-        autoCompleteUser.setAdapter(new AutoCompleteUsersAdapter(this.getActivity()));
+        autoCompleteUser.setAdapter(new AutoCompleteUsersAdapter(this.getActivity(), eventId));
         autoCompleteUser.setLoadingIndicator(
                 (android.widget.ProgressBar) view.findViewById(R.id.pb_loading_indicator));
         autoCompleteUser.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -83,6 +81,8 @@ public class AutoCompleteFragment extends Fragment implements IServiceHelper {
                 asyncTask = new EventServiceHelper(getActivity().getApplicationContext());
                 asyncTask.delegate = AutoCompleteFragment.this;
                 asyncTask.execute(ServiceHelper.POST_METHOD, asyncTask.getAddUserToEventString(), "", "", eventId, autoCompleteUser.getText().toString());
+                autoCompleteUser.setText("");
+                UsersFragment.getInstance().getUsersForEvent();
             }
         });
     }

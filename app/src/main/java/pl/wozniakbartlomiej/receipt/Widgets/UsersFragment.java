@@ -29,7 +29,7 @@ public class UsersFragment extends Fragment implements IServiceHelper {
     private ListView listView;
     private ArrayList usersList;
     private String eventId;
-
+    static  UsersFragment usersFragment;
 
     public UsersFragment() {
     }
@@ -42,7 +42,12 @@ public class UsersFragment extends Fragment implements IServiceHelper {
         assignViewElements(view);
         initUsersList();
         getUsersForEvent();
+        usersFragment=this;
         return view;
+    }
+
+    public static UsersFragment getInstance(){
+        return usersFragment;
     }
 
     /**
@@ -69,7 +74,7 @@ public class UsersFragment extends Fragment implements IServiceHelper {
     /**
      * Call async method to get users for event.
      */
-    private void getUsersForEvent() {
+    public void getUsersForEvent() {
         asyncTask = new EventServiceHelper(getActivity().getApplicationContext());
         asyncTask.delegate = this;
         asyncTask.execute(ServiceHelper.POST_METHOD, asyncTask.getEventString(), "", "", eventId);
@@ -88,6 +93,7 @@ public class UsersFragment extends Fragment implements IServiceHelper {
      * Extract event JSON to get title and description.
      */
     private void extractJson(String result) {
+        usersList.clear();
         JSONObject resultObject = null;
         JSONObject eventObject = null;
         JSONArray eventUsers= null;
@@ -101,7 +107,7 @@ public class UsersFragment extends Fragment implements IServiceHelper {
                 JSONObject a =objects.getJSONObject("local");
                 String email = a.get("email").toString();
                 //String email = objects.getString("email");
-                addEventToList(id, email);
+                addUserToList(id, email);
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -111,7 +117,7 @@ public class UsersFragment extends Fragment implements IServiceHelper {
     /**
      * Add user to list.
      */
-    private void addEventToList(String id, String email) {
+    private void addUserToList(String id, String email) {
         User user = new User();
         user.setId(id);
         user.setEmail(email);

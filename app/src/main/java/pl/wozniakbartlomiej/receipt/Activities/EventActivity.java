@@ -46,11 +46,11 @@ public class EventActivity extends AppCompatActivity {
             FragmentManager fragmentManager = getFragmentManager();
             FragmentTransaction fragmentTransaction;
             fragmentTransaction = fragmentManager.beginTransaction();
-            Fragment fragment = new UsersFragment();
+            Fragment usersFragment = new UsersFragment();
             Bundle bundle = new Bundle();
             bundle.putString("eventId", eventId);
-            fragment.setArguments(bundle);
-            fragmentTransaction.add(R.id.frameAddedUsersLayout, fragment);
+            usersFragment.setArguments(bundle);
+            fragmentTransaction.add(R.id.frameAddedUsersLayout, usersFragment);
             fragmentTransaction.commit();
         }
     }
@@ -64,11 +64,11 @@ public class EventActivity extends AppCompatActivity {
             FragmentManager fragmentManager = getFragmentManager();
             FragmentTransaction fragmentTransaction;
             fragmentTransaction = fragmentManager.beginTransaction();
-            Fragment fragment = new AutoCompleteFragment();
+            Fragment autoCompleteFragment = new AutoCompleteFragment();
             Bundle bundle = new Bundle();
             bundle.putString("eventId", eventId);
-            fragment.setArguments(bundle);
-            fragmentTransaction.add(R.id.frameAutoCompleteLayout, fragment);
+            autoCompleteFragment.setArguments(bundle);
+            fragmentTransaction.add(R.id.frameAutoCompleteLayout, autoCompleteFragment);
             fragmentTransaction.commit();
         }
     }
