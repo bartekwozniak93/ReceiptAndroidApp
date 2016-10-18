@@ -65,7 +65,7 @@ public class EventsFragment extends Fragment implements IServiceHelper {
     private void getUserEvents() {
         asyncTask = new EventServiceHelper(getActivity().getApplicationContext());
         asyncTask.delegate = this;
-        asyncTask.execute(ServiceHelper.GET_METHOD, asyncTask.getUserEventsString(), "", "");
+        asyncTask.execute(ServiceHelper.GET_METHOD, ServiceHelper.getUserEventsString(), "", "");
     }
 
     /**

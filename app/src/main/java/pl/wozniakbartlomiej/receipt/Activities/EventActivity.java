@@ -3,8 +3,10 @@ package pl.wozniakbartlomiej.receipt.Activities;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.TextView;
 
 import pl.wozniakbartlomiej.receipt.R;
@@ -35,6 +37,16 @@ public class EventActivity extends AppCompatActivity {
     private void addFragmentsToView(){
         addAddedUsersFragment();
         addAutoCompleteFragment();
+    }
+
+    /**
+     * Go to view
+     * to add Receipt.
+     */
+    public void onClick_AddReceipt(View view){
+        Intent i = new Intent(this, AddReceiptActivity.class);
+        i.putExtra("eventId",eventId);
+        startActivity(i);
     }
 
     /**

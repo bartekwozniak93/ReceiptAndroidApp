@@ -100,7 +100,7 @@ public class LoginActivity extends AppCompatActivity implements IServiceHelper {
         //Execute async method for login.
         asyncTask = new UserServiceHelper(LoginActivity.this);
         asyncTask.delegate = LoginActivity.this;
-        asyncTask.execute(ServiceHelper.POST_METHOD, asyncTask.getFacebookString(), email, "");
+        asyncTask.execute(ServiceHelper.POST_METHOD, ServiceHelper.getFacebookString(), email, "");
     }
 
     @Override
@@ -116,7 +116,7 @@ public class LoginActivity extends AppCompatActivity implements IServiceHelper {
         asyncTask = new UserServiceHelper(LoginActivity.this);
         asyncTask.delegate = this;
         asyncTask.setProcessDialog(getApplicationContext().getString(R.string.progress_dialog_header));
-        asyncTask.execute(ServiceHelper.POST_METHOD, asyncTask.getLoginString(), getUserEmailFromView(), getUserPasswordFromView());
+        asyncTask.execute(ServiceHelper.POST_METHOD, ServiceHelper.getLoginString(), getUserEmailFromView(), getUserPasswordFromView());
     }
 
     /**

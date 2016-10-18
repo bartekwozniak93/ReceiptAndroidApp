@@ -2,28 +2,32 @@ package pl.wozniakbartlomiej.receipt.Services;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.res.Resources;
 import android.os.AsyncTask;
 
 import java.util.HashMap;
 
 /**
- * Helper for REST Service for user's methods
- * such as for login, logout etc.
+ * Created by Bartek on 19/10/16.
  */
-public class UserServiceHelper extends AsyncTask<String, Void, String> {
+public class ReceiptServiceHelper extends AsyncTask<String, Void, String> {
     private ProgressDialog progressDialog;
     public IServiceHelper delegate;
     private Context applicationContext;
+    private Resources applicationResources;
+    private UserSessionManager session;
 
-
-    public UserServiceHelper(Context context) {
+    public ReceiptServiceHelper(Context context) {
         this.applicationContext = context;
+        this.session = new UserSessionManager(context);
+        this.applicationResources = context.getResources();
     }
 
-
+    /**
+     * Initialize progress dialog with given title.
+     */
     public void setProcessDialog(String title) {
-        //initialize progress dialog
-        progressDialog = ProgressDialog.show(applicationContext, "", title, false);
+        progressDialog= ProgressDialog.show(applicationContext,"",title,false);
     }
 
     @Override
@@ -31,20 +35,25 @@ public class UserServiceHelper extends AsyncTask<String, Void, String> {
         String requestMethod = params[0];
         String url = params[1];
         HashMap<String, String> requestParameters = null;
-        if (requestMethod == ServiceHelper.POST_METHOD) {
+        if(requestMethod == ServiceHelper.POST_METHOD) {
             requestParameters = prepareRequestParams(params);
         }
         return new ServiceHelper(applicationContext).getJSON(requestMethod, url, requestParameters);
     }
 
-    private HashMap<String, String> prepareRequestParams(String... params) {
-        String email = ServiceHelper.getParam(2, params);
-        String password = ServiceHelper.getParam(3, params);
+    /**
+     * Prepare request parameters for new event.
+     */
+    private HashMap<String, String> prepareRequestParams(String... params){
+        String title = ServiceHelper.getParam(2, params);
+        String description = ServiceHelper.getParam(3, params);
         String eventId = ServiceHelper.getParam(4, params);
         HashMap<String, String> requestParameters = new HashMap<>();
-        requestParameters.put(ServiceHelper.PARAMS_EMAIL, email);
-        requestParameters.put(ServiceHelper.PARAMS_PASSWORD, password);
+        requestParameters.put(ServiceHelper.PARAMS_TITLE, title);
+        requestParameters.put(ServiceHelper.PARAMS_DESCRIPTION, description);
+        requestParameters.put(ServiceHelper.PARAMS_DATE, ServiceHelper.getCurrentDate());
         requestParameters.put(ServiceHelper.PARAMS_EVENT_ID, eventId);
+        requestParameters.put(ServiceHelper.PARAMS_USER, session.getProperty(UserSessionManager.SessionKey.EMAIL));
         return requestParameters;
     }
 
@@ -54,14 +63,10 @@ public class UserServiceHelper extends AsyncTask<String, Void, String> {
     @Override
     public void onPostExecute(String result) {
         //close progress dialog before executing
-        if (progressDialog != null)
+        if(progressDialog!=null)
             progressDialog.dismiss();
         //pass result through delegate
-        if (delegate != null)
+        if(delegate!=null)
             delegate.userServiceProcess(result);
     }
-
-
-
 }
-

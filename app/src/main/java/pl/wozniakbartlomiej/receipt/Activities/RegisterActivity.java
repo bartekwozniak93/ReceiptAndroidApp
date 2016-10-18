@@ -44,7 +44,7 @@ public class RegisterActivity extends AppCompatActivity implements IServiceHelpe
         asyncTask =new UserServiceHelper(RegisterActivity.this);
         asyncTask.delegate = this;
         asyncTask.setProcessDialog(getApplicationContext().getString(R.string.progress_dialog_header));
-        asyncTask.execute(ServiceHelper.POST_METHOD, asyncTask.getUserString(), getUserEmailFromView(), getUserPasswordFromView());
+        asyncTask.execute(ServiceHelper.POST_METHOD, ServiceHelper.getUserString(), getUserEmailFromView(), getUserPasswordFromView());
     }
 
     /**

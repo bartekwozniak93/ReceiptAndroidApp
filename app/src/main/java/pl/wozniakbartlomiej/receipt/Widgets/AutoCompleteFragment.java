@@ -80,7 +80,7 @@ public class AutoCompleteFragment extends Fragment implements IServiceHelper {
             public void onClick(View v) {
                 asyncTask = new EventServiceHelper(getActivity().getApplicationContext());
                 asyncTask.delegate = AutoCompleteFragment.this;
-                asyncTask.execute(ServiceHelper.POST_METHOD, asyncTask.getAddUserToEventString(), "", "", eventId, autoCompleteUser.getText().toString());
+                asyncTask.execute(ServiceHelper.POST_METHOD, ServiceHelper.getAddUserToEventString(), "", "", eventId, autoCompleteUser.getText().toString());
                 autoCompleteUser.setText("");
                 UsersFragment.getInstance().getUsersForEvent();
             }

@@ -104,7 +104,7 @@ public class AutoCompleteUsersAdapter extends BaseAdapter implements Filterable 
         asyncTask =new UserServiceHelper(context);
         users.clear();
         try {
-            retrieveUserInformationFromJSON(asyncTask.execute(ServiceHelper.POST_METHOD, asyncTask.getUserFindString(), userValue, "", eventId).get());
+            retrieveUserInformationFromJSON(asyncTask.execute(ServiceHelper.POST_METHOD, ServiceHelper.getUserFindString(), userValue, "", eventId).get());
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {

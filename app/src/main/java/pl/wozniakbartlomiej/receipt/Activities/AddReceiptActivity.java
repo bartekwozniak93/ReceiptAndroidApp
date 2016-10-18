@@ -8,26 +8,27 @@ import android.view.View;
 import android.widget.EditText;
 
 import pl.wozniakbartlomiej.receipt.R;
-import pl.wozniakbartlomiej.receipt.Services.EventServiceHelper;
 import pl.wozniakbartlomiej.receipt.Services.IServiceHelper;
+import pl.wozniakbartlomiej.receipt.Services.ReceiptServiceHelper;
 import pl.wozniakbartlomiej.receipt.Services.ServiceHelper;
 
-public class AddEventActivity extends AppCompatActivity implements IServiceHelper {
+public class AddReceiptActivity extends AppCompatActivity implements IServiceHelper {
 
-    private EventServiceHelper asyncTask;
-
+    private ReceiptServiceHelper asyncTask;
+    private String eventId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_event);
+        eventId=getIntent().getExtras().getString("eventId");
+        setContentView(R.layout.activity_add_receipt);
     }
 
-    public void onClick_AddEvent(View view) {
+    public void onClick_AddReceipt(View view) {
         //Execute async method for add event.
-        asyncTask =new EventServiceHelper(AddEventActivity.this);
+        asyncTask =new ReceiptServiceHelper(AddReceiptActivity.this);
         asyncTask.delegate = this;
         asyncTask.setProcessDialog(getApplicationContext().getString(R.string.progress_dialog_header));
-        asyncTask.execute(ServiceHelper.POST_METHOD, ServiceHelper.getPostEventString(), getTitleFromView(), getDescriptionFromView());
+        asyncTask.execute(ServiceHelper.POST_METHOD, ServiceHelper.getNewReceiptString(),getTitleFromView(), getDescriptionFromView(), eventId);
     }
 
     /**
@@ -36,7 +37,7 @@ public class AddEventActivity extends AppCompatActivity implements IServiceHelpe
     @Override
     public void userServiceProcess(String result) {
         try {
-            ////Redirect to EventsActivity
+            //Redirect to EventsActivity
             Intent i = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(i);
             finish();
@@ -45,7 +46,6 @@ public class AddEventActivity extends AppCompatActivity implements IServiceHelpe
             Log.d("RegisterActivity", e.getMessage());
         }
     }
-
 
     /**
      * Get Title From View
@@ -67,6 +67,4 @@ public class AddEventActivity extends AppCompatActivity implements IServiceHelpe
         String description = editText_Description.getText().toString().toLowerCase();
         return description;
     }
-
 }
-

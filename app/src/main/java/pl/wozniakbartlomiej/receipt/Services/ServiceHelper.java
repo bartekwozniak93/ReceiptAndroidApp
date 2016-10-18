@@ -1,6 +1,8 @@
 package pl.wozniakbartlomiej.receipt.Services;
 
 import android.content.Context;
+import android.content.res.Resources;
+import android.text.format.Time;
 import android.util.Log;
 
 import org.json.JSONException;
@@ -21,14 +23,28 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+import pl.wozniakbartlomiej.receipt.R;
+import pl.wozniakbartlomiej.receipt.Receipt;
+
 /**
  * Created by Bartek on 03/10/16.
  */
 public class ServiceHelper {
 
+    public static String PARAMS_TITLE = "title";
+    public static String PARAMS_DATE = "date";
+    public static String PARAMS_DESCRIPTION = "description";
+    public static String PARAMS_USER = "user";
+    public static String PARAMS_EVENT_ID = "eventId";
+    public static String PARAMS_USER_TO_ADD = "userToAdd";
+    public static String PARAMS_EMAIL = "email";
+    public static String PARAMS_PASSWORD = "password";
+
     public static String POST_METHOD = "POST";
     public static String GET_METHOD = "GET";
     private UserSessionManager session;
+    private static Resources resources = Receipt.getResourcesStatic();
+    private static String api_link = resources.getString(R.string.api_link);
 
     public ServiceHelper(Context context){
         this.session = new UserSessionManager(context);
@@ -154,10 +170,97 @@ public class ServiceHelper {
     }
 
     /**
+     * Get parameters from param by given i.
+     */
+    public static String getParam(int i, String... params) {
+        if (params.length > i)
+            return params[i];
+        else
+            return "";
+    }
+
+    /**
      * Return token of the user
      */
     public String getAuthorizationToken() {
         String jwtToken = session.getProperty(UserSessionManager.SessionKey.TOKEN);
         return jwtToken;
     }
+
+    public static String getCurrentDate(){
+        Time time = new Time();
+        time.setToNow();
+        return time.toString();
+    }
+
+    /**
+     * Return link for posting new event.
+     */
+    public static String getPostEventString() {
+        return api_link + resources.getString(R.string.api_post_event);
+    }
+
+    /**
+     * Return link for getting user's events.
+     */
+    public static String getUserEventsString() {
+        return api_link + resources.getString(R.string.api_get_events);
+    }
+
+    /**
+     * Return link for getting user event with siven id..
+     */
+    public static String getEventString() {
+        return api_link + resources.getString(R.string.api_get_event);
+    }
+
+    /**
+     * Return link for adding user to event.
+     */
+    public static String getAddUserToEventString() {
+        return api_link + resources.getString(R.string.api_post_add_user_event);
+    }
+
+    /**
+     * Return link for login.
+     */
+    public static String getLoginString() {
+        return api_link + resources.getString(R.string.api_login);
+    }
+
+    /**
+     * Return link for logout.
+     */
+    public static String getLogoutString() {
+        return api_link + resources.getString(R.string.api_logout);
+    }
+
+    /**
+     * Return link for posting new user or geting info about user.
+     */
+    public static String getUserString() {
+        return api_link + resources.getString(R.string.api_users);
+    }
+
+    /**
+     * Return link for Facebook login.
+     */
+    public static String getFacebookString() {
+        return api_link + resources.getString(R.string.api_facebook);
+    }
+
+    /**
+     * Return link for find users name
+     */
+    public static String getUserFindString() {
+        return api_link + resources.getString(R.string.api_users_find);
+    }
+
+    /**
+     * Return link for add new Receipt.
+     */
+    public static String getNewReceiptString() {
+        return api_link + resources.getString(R.string.api_post_receipt);
+    }
+
 }
