@@ -146,7 +146,8 @@ public class LoginActivity extends AppCompatActivity implements IServiceHelper {
     @Override
     public void userServiceProcess(String result) {
         try {
-            progressDialog.dismiss();
+            if(progressDialog!=null)
+                progressDialog.dismiss();
             session.createLoginSession(retriveUserEmailFromJSON(result), retriveUserTokenFromJSON(result));
             Intent i = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(i);

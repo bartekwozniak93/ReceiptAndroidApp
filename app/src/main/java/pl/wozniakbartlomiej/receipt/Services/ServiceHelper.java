@@ -40,6 +40,7 @@ public class ServiceHelper {
     public static String PARAMS_USER_TO_ADD = "userToAdd";
     public static String PARAMS_EMAIL = "email";
     public static String PARAMS_PASSWORD = "password";
+    public static String PARAMS_RECEIPT_ID = "receiptId";
 
     public static String POST_METHOD = "POST";
     public static String GET_METHOD = "GET";
@@ -97,11 +98,11 @@ public class ServiceHelper {
      * The following code convertToUrl is from
      * http://fancifulandroid.blogspot.sg/2013/07/android-convert-string-to-valid-url.html
      */
-    public static void addParamsToRequestBody(HttpURLConnection httpURLConnection, HashMap<String, String> values) {
-        if(values == null || values.isEmpty())
+    public static void addParamsToRequestBody(HttpURLConnection httpURLConnection, JSONObject values) {
+        if(values == null)
             return;
         try {
-            JSONObject postDataParams = putValuesIntoJSON(values);
+            JSONObject postDataParams = values;
             OutputStream streamm = httpURLConnection.getOutputStream();
             BufferedWriter writer = new BufferedWriter(
                     new OutputStreamWriter(streamm, "UTF-8"));
@@ -117,7 +118,7 @@ public class ServiceHelper {
     /**
      * Put hashmap into JSONObject
      */
-    private static JSONObject putValuesIntoJSON(HashMap<String, String> values){
+    public static JSONObject putValuesIntoJSON(HashMap<String, String> values){
         JSONObject postDataParams = new JSONObject();
         Iterator it = values.entrySet().iterator();
         while (it.hasNext()) {
@@ -136,7 +137,7 @@ public class ServiceHelper {
      * Get result from service for authorization methods
      * as a JSON object.
      */
-    public String getJSON(String requestMethod, String url, HashMap<String, String> requestParameters) {
+    public String getJSON(String requestMethod, String url, JSONObject requestParameters) {
         URL serviceUrl = convertToUrl(url);
         HttpURLConnection httpURLConnection = null;
         int responseCode = -1;
@@ -270,4 +271,19 @@ public class ServiceHelper {
     public static String getReceiptsString() {
         return api_link + resources.getString(R.string.api_post_get_receipts);
     }
+
+    /**
+     * Return link for get Receipt.
+     */
+    public static String getReceiptString() {
+        return api_link + resources.getString(R.string.api_get_receipt);
+    }
+
+    /**
+     * Return link for edit Receipt.
+     */
+    public static String getEditReceiptString() {
+        return api_link + resources.getString(R.string.api_edit_receipt);
+    }
+
 }

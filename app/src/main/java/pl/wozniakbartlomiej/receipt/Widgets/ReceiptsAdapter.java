@@ -1,6 +1,7 @@
 package pl.wozniakbartlomiej.receipt.Widgets;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import pl.wozniakbartlomiej.receipt.Activities.ReceiptActivity;
 import pl.wozniakbartlomiej.receipt.Models.Receipt;
 import pl.wozniakbartlomiej.receipt.R;
 
@@ -59,18 +61,20 @@ public class ReceiptsAdapter extends BaseAdapter {
             listViewElement = (ListViewElement) convertView.getTag();
         }
 
-        //listViewElement.getItem().setOnClickListener(new View.OnClickListener() {
-        //    @Override
-        //    public void onClick(View v) {
-        //        Intent itent = new Intent(context, EventActivity.class);
-        //        itent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        //        itent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        //        itent.putExtra("id", currentReceipt.getId());
-        //        itent.putExtra("title", currentReceipt.getTitle());
-        //        itent.putExtra("description", currentReceipt.getDescription());
-        //        context.startActivity(itent);
-        //    }
-        //});
+        listViewElement.getItem().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent itent = new Intent(context, ReceiptActivity.class);
+                itent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                itent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                itent.putExtra("receiptId", currentReceipt.getId());
+                itent.putExtra("receiptTitle", currentReceipt.getTitle());
+                itent.putExtra("receiptDescription", currentReceipt.getDescription());
+                itent.putExtra("receiptTotal", currentReceipt.getTotal());
+                itent.putExtra("eventId", currentReceipt.getEventId());
+                context.startActivity(itent);
+            }
+        });
         listViewElement.setTitle(currentReceipt.getTitle());
         listViewElement.setDescription(currentReceipt.getDescription());
         listViewElement.setIcon(currentReceipt.getImageId());
@@ -91,7 +95,7 @@ public class ReceiptsAdapter extends BaseAdapter {
             layout_Item = (LinearLayout) item.findViewById(R.id.item);
             textView_Title = (TextView) item.findViewById(R.id.title);
             textView_Description = (TextView) item.findViewById(R.id.description);
-            textView_Total= (TextView) item.findViewById(R.id.total);
+            textView_Total = (TextView) item.findViewById(R.id.total);
             imageView_Icon = (ImageView) item.findViewById(R.id.icon);
         }
 

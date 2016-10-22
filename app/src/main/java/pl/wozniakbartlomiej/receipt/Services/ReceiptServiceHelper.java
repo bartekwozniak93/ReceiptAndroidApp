@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.os.AsyncTask;
 
+import org.json.JSONObject;
+
 import java.util.HashMap;
 
 /**
@@ -35,10 +37,12 @@ public class ReceiptServiceHelper extends AsyncTask<String, Void, String> {
         String requestMethod = params[0];
         String url = params[1];
         HashMap<String, String> requestParameters = null;
+        JSONObject parameters= null;
         if(requestMethod == ServiceHelper.POST_METHOD) {
             requestParameters = prepareRequestParams(params);
+            parameters = ServiceHelper.putValuesIntoJSON(requestParameters);
         }
-        return new ServiceHelper(applicationContext).getJSON(requestMethod, url, requestParameters);
+        return new ServiceHelper(applicationContext).getJSON(requestMethod, url, parameters);
     }
 
     /**
@@ -49,12 +53,14 @@ public class ReceiptServiceHelper extends AsyncTask<String, Void, String> {
         String description = ServiceHelper.getParam(3, params);
         String eventId = ServiceHelper.getParam(4, params);
         String total = ServiceHelper.getParam(5, params);
+        String receiptId = ServiceHelper.getParam(6, params);
         HashMap<String, String> requestParameters = new HashMap<>();
         requestParameters.put(ServiceHelper.PARAMS_TITLE, title);
         requestParameters.put(ServiceHelper.PARAMS_DESCRIPTION, description);
         requestParameters.put(ServiceHelper.PARAMS_DATE, ServiceHelper.getCurrentDate());
         requestParameters.put(ServiceHelper.PARAMS_EVENT_ID, eventId);
         requestParameters.put(ServiceHelper.PARAMS_TOTAL, total);
+        requestParameters.put(ServiceHelper.PARAMS_RECEIPT_ID, receiptId);
         requestParameters.put(ServiceHelper.PARAMS_USER, session.getProperty(UserSessionManager.SessionKey.EMAIL));
         return requestParameters;
     }
@@ -71,4 +77,5 @@ public class ReceiptServiceHelper extends AsyncTask<String, Void, String> {
         if(delegate!=null)
             delegate.userServiceProcess(result);
     }
+
 }

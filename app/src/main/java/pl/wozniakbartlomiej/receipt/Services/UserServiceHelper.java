@@ -4,6 +4,8 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 
+import org.json.JSONObject;
+
 import java.util.HashMap;
 
 /**
@@ -31,10 +33,12 @@ public class UserServiceHelper extends AsyncTask<String, Void, String> {
         String requestMethod = params[0];
         String url = params[1];
         HashMap<String, String> requestParameters = null;
+        JSONObject parameters= null;
         if (requestMethod == ServiceHelper.POST_METHOD) {
             requestParameters = prepareRequestParams(params);
+            parameters = ServiceHelper.putValuesIntoJSON(requestParameters);
         }
-        return new ServiceHelper(applicationContext).getJSON(requestMethod, url, requestParameters);
+        return new ServiceHelper(applicationContext).getJSON(requestMethod, url, parameters);
     }
 
     private HashMap<String, String> prepareRequestParams(String... params) {
@@ -60,8 +64,5 @@ public class UserServiceHelper extends AsyncTask<String, Void, String> {
         if (delegate != null)
             delegate.userServiceProcess(result);
     }
-
-
-
 }
 

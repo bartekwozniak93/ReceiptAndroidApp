@@ -10,6 +10,7 @@ public class Receipt {
     private String title;
     private String description;
     private String total;
+    private String eventId;
     private int imageId;
 
     public String getId() {
@@ -34,6 +35,14 @@ public class Receipt {
 
     public void setTotal(String total) {
         this.total = total;
+    }
+
+    public String getEventId() {
+        return eventId;
+    }
+
+    public void setEventId(String eventId) {
+        this.eventId = eventId;
     }
 
     public String getDescription() {

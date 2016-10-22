@@ -15,45 +15,45 @@ import java.util.HashMap;
 
 import pl.wozniakbartlomiej.receipt.Models.User;
 import pl.wozniakbartlomiej.receipt.R;
-import pl.wozniakbartlomiej.receipt.Services.EventServiceHelper;
 import pl.wozniakbartlomiej.receipt.Services.IServiceHelper;
+import pl.wozniakbartlomiej.receipt.Services.ReceiptServiceHelper;
 import pl.wozniakbartlomiej.receipt.Services.ServiceHelper;
 
 /**
- * A simple {@link android.app.Fragment} subclass.
+ * Created by Bartek on 22/10/16.
  */
-public class UsersForNewReceiptFragment extends android.app.Fragment implements IServiceHelper {
+public class UsersForEditReceiptFragment extends android.app.Fragment implements IServiceHelper {
 
-    private EventServiceHelper asyncTask;
+    private ReceiptServiceHelper asyncTask;
     private ListView listView;
     private ArrayList<User> usersList;
-    private String eventId;
-    static UsersForNewReceiptFragment usersFragmentForNewReceipt;
+    private String receiptId;
+    static UsersForEditReceiptFragment usersFragmentForEditReceipt;
 
-    public UsersForNewReceiptFragment() {
+    public UsersForEditReceiptFragment() {
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_users_for_new_receipt, container, false);
+        View view = inflater.inflate(R.layout.fragment_users_for_edit_receipt, container, false);
         getArgumentsFromActivity();
         assignViewElements(view);
         initUsersList();
         getUsersForEvent();
-        usersFragmentForNewReceipt = this;
+        usersFragmentForEditReceipt = this;
         return view;
     }
 
-    public static UsersForNewReceiptFragment getInstance() {
-        return usersFragmentForNewReceipt;
+    public static UsersForEditReceiptFragment getInstance() {
+        return usersFragmentForEditReceipt;
     }
 
     /**
      * Get arguments from Activity.
      */
     private void getArgumentsFromActivity() {
-        eventId = getArguments().getString("eventId");
+        receiptId = getArguments().getString("receiptId");
     }
 
     /**
@@ -74,9 +74,9 @@ public class UsersForNewReceiptFragment extends android.app.Fragment implements 
      * Call async method to get users for event.
      */
     public void getUsersForEvent() {
-        asyncTask = new EventServiceHelper(getActivity().getApplicationContext());
+        asyncTask = new ReceiptServiceHelper(getActivity().getApplicationContext());
         asyncTask.delegate = this;
-        asyncTask.execute(ServiceHelper.POST_METHOD, ServiceHelper.getEventString(), "", "", eventId);
+        asyncTask.execute(ServiceHelper.POST_METHOD, ServiceHelper.getReceiptString(), "", "", "", "", receiptId);
     }
 
     /**
@@ -95,18 +95,25 @@ public class UsersForNewReceiptFragment extends android.app.Fragment implements 
         usersList.clear();
         JSONObject resultObject = null;
         JSONObject eventObject = null;
+        JSONArray usersObject=null;
         JSONArray eventUsers = null;
         try {
             resultObject = new JSONObject(result);
-            eventObject = resultObject.getJSONArray("event").getJSONObject(0);
+            usersObject = resultObject.getJSONArray("users");
+            for (int i = 0; i < usersObject.length(); i++) {
+                JSONObject objects = usersObject.getJSONObject(i);
+                String id = objects.get("_id").toString();
+                JSONObject local = objects.getJSONObject("local");
+                String email = local.get("email").toString();
+                addUserToList(id, email, false);
+            }
+
+            eventObject = resultObject.getJSONObject("receipt");
             eventUsers = eventObject.getJSONArray("users");
             for (int i = 0; i < eventUsers.length(); i++) {
                 JSONObject objects = eventUsers.getJSONObject(i);
                 String id = objects.get("_id").toString();
-                JSONObject a = objects.getJSONObject("local");
-                String email = a.get("email").toString();
-                //String email = objects.getString("email");
-                addUserToList(id, email, true);
+                setCheckedUser(id);
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -124,10 +131,17 @@ public class UsersForNewReceiptFragment extends android.app.Fragment implements 
         usersList.add(user);
     }
 
-    public HashMap<String, Boolean> getCheckedUsers(){
+    private void setCheckedUser(String id){
+        for (int i=0; i< usersList.size(); i++){
+            if(usersList.get(i).getId().equals(id)) {
+                usersList.get(i).setIsChecked(true);
+            }
+        }
+    }
+
+    public HashMap<String, Boolean> getCheckedUsers() {
         HashMap<String, Boolean> map = new HashMap<>();
-        for (int i = 0; i < usersList.size(); i++)
-        {
+        for (int i = 0; i < usersList.size(); i++) {
             if(usersList.get(i).getIsChecked())
                 map.put(usersList.get(i).getId(), usersList.get(i).getIsChecked());
         }

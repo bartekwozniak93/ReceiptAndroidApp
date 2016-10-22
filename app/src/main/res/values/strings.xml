@@ -7,6 +7,7 @@
     <string name="btn_newEvent">Add new event</string>
     <string name="btn_getEvents">Get events</string>
     <string name="btn_addReceipt">Add receipt</string>
+    <string name="btn_editReceipt">Save</string>
     <string name="btn_getReceipts">Get events receipts</string>
     <string name="textview_logged_as">You are logged as</string>
     <string name="warning_email_already_taken">Email already taken.</string>
@@ -20,7 +21,9 @@
     <string name="api_post_event">/api/event</string>
     <string name="api_post_add_user_event">/api/event/adduser</string>
     <string name="api_get_event">/api/getevent</string>
+    <string name="api_edit_receipt">/api/editreceipt</string>
     <string name="api_post_receipt">/api/receipt</string>
+    <string name="api_get_receipt">/api/getreceipt</string>
     <string name="api_post_get_receipts">/api/receipts</string>
     <string name="api_users_find">/api/local/find</string>
     <string name="cam">Go to Camera</string>

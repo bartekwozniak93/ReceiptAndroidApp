@@ -44,7 +44,8 @@
         <activity android:name=".Activities.AddEventActivity" />
         <activity android:name=".Activities.EventActivity" />
         <activity android:name=".Activities.AddReceiptActivity" />
-        <activity android:name=".Activities.ReceiptsActivity"></activity>
+        <activity android:name=".Activities.ReceiptsActivity" />
+        <activity android:name=".Activities.ReceiptActivity"></activity>
     </application>
 
 </manifest>

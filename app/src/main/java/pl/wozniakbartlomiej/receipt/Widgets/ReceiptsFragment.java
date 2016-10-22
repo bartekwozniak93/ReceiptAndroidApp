@@ -29,6 +29,7 @@ public class ReceiptsFragment extends Fragment implements IServiceHelper {
     private ListView listView;
     private ArrayList receiptsList;
     private String eventId;
+
     public ReceiptsFragment() {
         // Required empty public constructor
     }
@@ -44,6 +45,7 @@ public class ReceiptsFragment extends Fragment implements IServiceHelper {
         getReceipts();
         return view;
     }
+    
 
     /**
      * Get arguments from Activity.
@@ -70,7 +72,7 @@ public class ReceiptsFragment extends Fragment implements IServiceHelper {
     /**
      * Call async method to get receipts for event.
      */
-    private void getReceipts() {
+    public void getReceipts() {
         asyncTask = new ReceiptServiceHelper(getActivity().getApplicationContext());
         asyncTask.delegate = this;
         asyncTask.execute(ServiceHelper.POST_METHOD, ServiceHelper.getReceiptsString(), "", "",eventId);
@@ -100,7 +102,8 @@ public class ReceiptsFragment extends Fragment implements IServiceHelper {
                 String title = objects.getString("title");
                 String description = objects.getString("description");
                 String total = objects.getString("total");
-                addReceipttToList(id, title, description,total);
+                String eventId = objects.getString("eventId");
+                addReceipttToList(id, title, description,total, eventId);
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -110,12 +113,13 @@ public class ReceiptsFragment extends Fragment implements IServiceHelper {
     /**
      * Add receipt element to list.
      */
-    private void addReceipttToList(String id, String title, String description, String total) {
+    private void addReceipttToList(String id, String title, String description, String total, String eventId) {
         Receipt receipt = new Receipt();
         receipt.setId(id);
         receipt.setTitle(title);
         receipt.setDescription(description);
         receipt.setTotal(total);
+        receipt.setEventId(eventId);
         receipt.setImageId(R.drawable.event_icon);
         receiptsList.add(receipt);
     }

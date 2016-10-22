@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="pl.wozniakbartlomiej.receipt.Activities.ReceiptActivity">
+
+    <EditText
+        android:id="@+id/editText_Title"
+        android:layout_width="match_parent"
+        android:layout_height="60sp"
+        android:hint="Input your title." />
+
+    <EditText
+        android:id="@+id/editText_Description"
+        android:layout_width="match_parent"
+        android:layout_height="60sp"
+        android:hint="Input your Description." />
+
+    <EditText
+        android:id="@+id/editText_Total"
+        android:inputType="number"
+        android:layout_width="match_parent"
+        android:layout_height="60sp"
+        android:hint="Input total." />
+
+    <FrameLayout
+        android:id="@+id/frameUsersForEditReceipt"
+        android:layout_width="match_parent"
+        android:layout_height="300px"/>
+
+    <Button
+        android:id="@+id/btn_editEvent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="onClick_EditReceipt"
+        android:text="@string/btn_editReceipt" />
+
+</LinearLayout>
