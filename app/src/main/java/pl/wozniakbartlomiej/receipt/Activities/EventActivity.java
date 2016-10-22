@@ -46,6 +46,18 @@ public class EventActivity extends AppCompatActivity {
     public void onClick_AddReceipt(View view){
         Intent i = new Intent(this, AddReceiptActivity.class);
         i.putExtra("eventId",eventId);
+        i.putExtra("eventTitle", eventTitle);
+        i.putExtra("eventDescription", eventDescription);
+        startActivity(i);
+    }
+
+    /**
+     * Go to view
+     * to see all receipts for Event
+     */
+    public void onClick_GetReceipts(View view){
+        Intent i = new Intent(this, ReceiptsActivity.class);
+        i.putExtra("eventId",eventId);
         startActivity(i);
     }
 

@@ -24,7 +24,7 @@ import java.util.Iterator;
 import java.util.Map;
 
 import pl.wozniakbartlomiej.receipt.R;
-import pl.wozniakbartlomiej.receipt.Receipt;
+import pl.wozniakbartlomiej.receipt.ReceiptResources;
 
 /**
  * Created by Bartek on 03/10/16.
@@ -34,6 +34,7 @@ public class ServiceHelper {
     public static String PARAMS_TITLE = "title";
     public static String PARAMS_DATE = "date";
     public static String PARAMS_DESCRIPTION = "description";
+    public static String PARAMS_TOTAL = "total";
     public static String PARAMS_USER = "user";
     public static String PARAMS_EVENT_ID = "eventId";
     public static String PARAMS_USER_TO_ADD = "userToAdd";
@@ -43,7 +44,7 @@ public class ServiceHelper {
     public static String POST_METHOD = "POST";
     public static String GET_METHOD = "GET";
     private UserSessionManager session;
-    private static Resources resources = Receipt.getResourcesStatic();
+    private static Resources resources = ReceiptResources.getResourcesStatic();
     private static String api_link = resources.getString(R.string.api_link);
 
     public ServiceHelper(Context context){
@@ -263,4 +264,10 @@ public class ServiceHelper {
         return api_link + resources.getString(R.string.api_post_receipt);
     }
 
+    /**
+     * Return link for get Receipts.
+     */
+    public static String getReceiptsString() {
+        return api_link + resources.getString(R.string.api_post_get_receipts);
+    }
 }

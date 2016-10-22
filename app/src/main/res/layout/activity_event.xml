@@ -22,6 +22,12 @@
         android:text="@string/btn_addReceipt"
         android:onClick="onClick_AddReceipt"/>
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_getReceipts"
+        android:onClick="onClick_GetReceipts"/>
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

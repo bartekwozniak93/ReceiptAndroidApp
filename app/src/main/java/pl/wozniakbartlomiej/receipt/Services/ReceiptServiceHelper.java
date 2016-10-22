@@ -48,11 +48,13 @@ public class ReceiptServiceHelper extends AsyncTask<String, Void, String> {
         String title = ServiceHelper.getParam(2, params);
         String description = ServiceHelper.getParam(3, params);
         String eventId = ServiceHelper.getParam(4, params);
+        String total = ServiceHelper.getParam(5, params);
         HashMap<String, String> requestParameters = new HashMap<>();
         requestParameters.put(ServiceHelper.PARAMS_TITLE, title);
         requestParameters.put(ServiceHelper.PARAMS_DESCRIPTION, description);
         requestParameters.put(ServiceHelper.PARAMS_DATE, ServiceHelper.getCurrentDate());
         requestParameters.put(ServiceHelper.PARAMS_EVENT_ID, eventId);
+        requestParameters.put(ServiceHelper.PARAMS_TOTAL, total);
         requestParameters.put(ServiceHelper.PARAMS_USER, session.getProperty(UserSessionManager.SessionKey.EMAIL));
         return requestParameters;
     }

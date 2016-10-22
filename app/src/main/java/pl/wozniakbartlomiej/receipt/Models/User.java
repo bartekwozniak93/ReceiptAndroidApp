@@ -6,6 +6,7 @@ package pl.wozniakbartlomiej.receipt.Models;
 public class User {
     private String id;
     private String email;
+    private boolean isChecked;
 
     public String getId() {
         return id;
@@ -21,6 +22,14 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public boolean getIsChecked() {
+        return isChecked;
+    }
+
+    public void setIsChecked(boolean isChecked) {
+        this.isChecked = isChecked;
     }
 
 }

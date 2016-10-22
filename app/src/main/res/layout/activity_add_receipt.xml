@@ -18,6 +18,18 @@
         android:layout_height="60sp"
         android:hint="Input your Description." />
 
+    <EditText
+        android:id="@+id/editText_Total"
+        android:inputType="number"
+        android:layout_width="match_parent"
+        android:layout_height="60sp"
+        android:hint="Input total." />
+
+    <FrameLayout
+        android:id="@+id/frameUsersForNewReceipt"
+        android:layout_width="match_parent"
+        android:layout_height="300px"/>
+
     <Button
         android:id="@+id/btn_newEvent"
         android:layout_width="match_parent"
