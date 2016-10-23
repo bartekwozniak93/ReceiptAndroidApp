@@ -45,7 +45,7 @@ public class ReceiptsFragment extends Fragment implements IServiceHelper {
         getReceipts();
         return view;
     }
-    
+
 
     /**
      * Get arguments from Activity.
