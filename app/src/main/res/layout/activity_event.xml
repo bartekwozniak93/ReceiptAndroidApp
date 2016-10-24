@@ -1,44 +1,114 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:orientation="vertical"
+tools:context="pl.wozniakbartlomiej.receipt.Activities.EventActivity">
+
+<LinearLayout
+    android:id="@+id/headerLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="pl.wozniakbartlomiej.receipt.Activities.EventActivity">
+    android:layout_height="wrap_content"
+    android:background="@drawable/border"
+    android:orientation="horizontal">
 
+    <ImageView
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:padding="10dp"
+        android:scaleType="fitStart"
+        android:src="@drawable/card" />
     <TextView
-        android:id="@+id/textView_Title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <TextView
-        android:id="@+id/textView_Description"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <Button
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/btn_addReceipt"
-        android:onClick="onClick_AddReceipt"/>
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/btn_getReceipts"
-        android:onClick="onClick_GetReceipts"/>
-
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/frameAutoCompleteLayout"
-        android:layout_gravity="center_horizontal" />
-
-    <FrameLayout
-        android:id="@+id/frameAddedUsersLayout"
-        android:layout_width="match_parent"
-        android:layout_height="200px"/>
-
-
-
+        android:layout_gravity="center"
+        android:text="Event balance"
+        android:textColor="@color/colorWhite"
+        android:textSize="30dp" />
 </LinearLayout>
+<LinearLayout
+    android:id="@+id/footerLaout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:background="@color/colorMenuBottomForReceipt"
+    android:orientation="horizontal">
+
+
+    <ImageButton
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:onClick="onClick_BackToEvents"
+        android:padding="10dp"
+        android:src="@drawable/back" />
+
+    <ImageButton
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:onClick="onClick_AddReceipt"
+        android:padding="10dp"
+        android:src="@drawable/plus_black" />
+
+    <ImageButton
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:padding="10dp"
+        android:onClick="onClick_AddUser"
+        android:src="@drawable/adduser_black" />
+
+    <ImageButton
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:padding="10dp"
+        android:src="@drawable/balance_white" />
+</LinearLayout>
+ 
+
+<ScrollView
+    android:id="@+id/listview"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_above="@id/footerLaout"
+    android:layout_below="@id/headerLayout">
+
+    <LinearLayout
+        android:id="@+id/mainLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:id="@+id/textView_Title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/textView_Description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+
+
+        <FrameLayout
+            android:id="@+id/frameReceiptsLayout"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"/>
+
+
+    </LinearLayout>
+
+</ScrollView>
+
+
+</RelativeLayout>
+

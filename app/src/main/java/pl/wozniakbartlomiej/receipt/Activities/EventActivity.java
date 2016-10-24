@@ -10,8 +10,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import pl.wozniakbartlomiej.receipt.R;
-import pl.wozniakbartlomiej.receipt.Widgets.AutoCompleteFragment;
-import pl.wozniakbartlomiej.receipt.Widgets.UsersFragment;
+import pl.wozniakbartlomiej.receipt.Widgets.ReceiptsFragment;
 
 public class EventActivity extends AppCompatActivity {
 
@@ -28,84 +27,42 @@ public class EventActivity extends AppCompatActivity {
         getExtrasFromIntent();
         assignViewElements();
         setTextToViewElements();
-        addFragmentsToView();
+        addReceiptsFragment();
     }
 
-    /**
-     * Add fragments to View.
-     */
-    private void addFragmentsToView(){
-        addAddedUsersFragment();
-        addAutoCompleteFragment();
-    }
 
     /**
-     * Go to view
-     * to add Receipt.
-     */
-    public void onClick_AddReceipt(View view){
-        Intent i = new Intent(this, AddReceiptActivity.class);
-        i.putExtra("eventId",eventId);
-        i.putExtra("eventTitle", eventTitle);
-        i.putExtra("eventDescription", eventDescription);
-        startActivity(i);
-    }
-
-    /**
-     * Go to view
-     * to see all receipts for Event
-     */
-    public void onClick_GetReceipts(View view){
-        Intent i = new Intent(this, ReceiptsActivity.class);
-        i.putExtra("eventId",eventId);
-        startActivity(i);
-    }
-
-    /**
-     * Check if there's already UsersFragment added.
+     * Check if there's already ReceiptsFragment added.
      * If not, add.
      */
-    private void addAddedUsersFragment(){
-        if (findViewById(R.id.frameAddedUsersLayout) != null) {
+    private void addReceiptsFragment(){
+        if (findViewById(R.id.frameReceiptsLayout) != null) {
             FragmentManager fragmentManager = getFragmentManager();
             FragmentTransaction fragmentTransaction;
             fragmentTransaction = fragmentManager.beginTransaction();
-            Fragment usersFragment = new UsersFragment();
+            Fragment receiptsFragment = new ReceiptsFragment();
             Bundle bundle = new Bundle();
             bundle.putString("eventId", eventId);
-            usersFragment.setArguments(bundle);
-            fragmentTransaction.add(R.id.frameAddedUsersLayout, usersFragment);
+            receiptsFragment.setArguments(bundle);
+            fragmentTransaction.add(R.id.frameReceiptsLayout, receiptsFragment);
             fragmentTransaction.commit();
         }
     }
 
-    /**
-     * Check if there's already AutoCompleteFragment added.
-     * If not, add.
-     */
-    private void addAutoCompleteFragment(){
-        if (findViewById(R.id.frameAutoCompleteLayout) != null) {
-            FragmentManager fragmentManager = getFragmentManager();
-            FragmentTransaction fragmentTransaction;
-            fragmentTransaction = fragmentManager.beginTransaction();
-            Fragment autoCompleteFragment = new AutoCompleteFragment();
-            Bundle bundle = new Bundle();
-            bundle.putString("eventId", eventId);
-            autoCompleteFragment.setArguments(bundle);
-            fragmentTransaction.add(R.id.frameAutoCompleteLayout, autoCompleteFragment);
-            fragmentTransaction.commit();
-        }
-    }
+
+
+
+
 
     /**
-     * Get event's id, title and description from Intent.
+     * Get extras from Intent.
      */
-    private void getExtrasFromIntent(){
+    private void getExtrasFromIntent() {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            eventId = extras.getString("id");
-            eventTitle = extras.getString("title");
-            eventDescription = extras.getString("description");
+            eventId = getIntent().getExtras().getString("eventId");
+            eventTitle = getIntent().getExtras().getString("eventTitle");
+            eventDescription = getIntent().getExtras().getString("eventDescription");
         }
     }
 
@@ -124,6 +81,42 @@ public class EventActivity extends AppCompatActivity {
         textView_Title.setText(eventTitle);
         textView_Description.setText(eventDescription);
     }
+
+
+
+
+    /**
+     * Go to Event section
+     */
+    public void onClick_BackToEvents(View view){
+        Intent i = new Intent(this, MainActivity.class);
+        startActivity(i);
+    }
+
+    /**
+     * Go to view
+     * to add Receipt.
+     */
+    public void onClick_AddReceipt(View view){
+        Intent i = new Intent(this, AddReceiptActivity.class);
+        i.putExtra("eventId",eventId);
+        i.putExtra("eventTitle", eventTitle);
+        i.putExtra("eventDescription", eventDescription);
+        startActivity(i);
+    }
+
+    /**
+     * Go to view
+     * to add UserActivity.
+     */
+    public void onClick_AddUser(View view){
+        Intent i = new Intent(this, AddUserActivity.class);
+        i.putExtra("eventId",eventId);
+        i.putExtra("eventTitle", eventTitle);
+        i.putExtra("eventDescription", eventDescription);
+        startActivity(i);
+    }
+
 
 
 }

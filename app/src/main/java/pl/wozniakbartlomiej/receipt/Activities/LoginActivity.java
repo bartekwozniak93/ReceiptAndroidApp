@@ -149,7 +149,7 @@ public class LoginActivity extends AppCompatActivity implements IServiceHelper {
             if(progressDialog!=null)
                 progressDialog.dismiss();
             session.createLoginSession(retriveUserEmailFromJSON(result), retriveUserTokenFromJSON(result));
-            Intent i = new Intent(getApplicationContext(), MainActivity.class);
+            Intent i = new Intent(getApplicationContext(), AddEventActivity.class);
             startActivity(i);
             finish();
         } catch (Exception e) {

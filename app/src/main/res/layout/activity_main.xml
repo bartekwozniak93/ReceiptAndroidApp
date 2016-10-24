@@ -1,46 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Activities.MainActivity">
+    tools:context="pl.wozniakbartlomiej.receipt.Activities.MainActivity">
 
-    <fragment
-        android:id="@+id/fragment"
-        android:name="pl.wozniakbartlomiej.receipt.Widgets.UserLogOutFragment"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout="@layout/fragment_logout"
-        tools:layout="@layout/fragment_logout" />
-
-    <!--testing camera from login directly.
-    <Button
+    <LinearLayout
+        android:id="@+id/headerLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="onClick_Camera"
-        android:id="@+id/btn_camera"
-        android:text="@string/cam"
-        />
-    -->
+        android:background="@drawable/border"
+        android:orientation="horizontal">
 
-    <Button
-        android:id="@+id/btn_event"
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:padding="10dp"
+            android:scaleType="fitStart"
+            android:src="@drawable/userevents" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Your events"
+            android:textColor="@color/colorWhite"
+            android:textSize="30dp" />
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/footerLaout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="onClick_NewEvent"
-        android:text="@string/btn_newEvent" />
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorMenuBottom"
+        android:orientation="horizontal">
 
+        <ImageButton
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:onClick="btn_go_to_add_event_activity"
+            android:padding="10dp"
+            android:src="@drawable/plus_black" />
+
+        <ImageButton
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:padding="10dp"
+            android:src="@drawable/events_white" />
+
+        <ImageButton
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:onClick="btn_go_to_balance_activity"
+            android:padding="10dp"
+            android:src="@drawable/balance_black" />
+
+        <ImageButton
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:onClick="btn_go_to_user_activity"
+            android:padding="10dp"
+            android:src="@drawable/user_black" />
+    </LinearLayout>
+     
 
     <fragment
-        android:id="@+id/fragment1"
+        android:id="@+id/listview"
         android:name="pl.wozniakbartlomiej.receipt.Widgets.EventsFragment"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal" />
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_above="@id/footerLaout"
+        android:layout_below="@id/headerLayout" />
 
 
-</LinearLayout>
+</RelativeLayout>
+
+
+
+
 
 
 

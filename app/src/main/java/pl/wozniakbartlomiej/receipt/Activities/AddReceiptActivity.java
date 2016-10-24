@@ -60,9 +60,9 @@ public class AddReceiptActivity extends AppCompatActivity implements IServiceHel
 
             //Redirect to EventsActivity
             Intent i = new Intent(getApplicationContext(), EventActivity.class);
-            i.putExtra("id", eventId);
-            i.putExtra("title", eventTitle);
-            i.putExtra("description", eventDescription);
+            i.putExtra("eventId", eventId);
+            i.putExtra("eventTitle", eventTitle);
+            i.putExtra("eventDescription", eventDescription);
             startActivity(i);
             finish();
         }
@@ -114,12 +114,35 @@ public class AddReceiptActivity extends AppCompatActivity implements IServiceHel
             Fragment usersFragmentForNewReceipt = new UsersForNewReceiptFragment();
             Bundle bundle = new Bundle();
             bundle.putString("eventId", eventId);
+            bundle.putString("eventTitle", eventTitle);
+            bundle.putString("eventDescription", eventDescription);
             usersFragmentForNewReceipt.setArguments(bundle);
             fragmentTransaction.add(R.id.frameUsersForNewReceipt, usersFragmentForNewReceipt);
             fragmentTransaction.commit();
         }
     }
 
+
+    public void onClick_BackToEvents(View view){
+        Intent i = new Intent(this, MainActivity.class);
+        startActivity(i);
+    }
+
+    public void onClick_AddUser(View view){
+        Intent i = new Intent(this, AddUserActivity.class);
+        i.putExtra("eventId",eventId);
+        i.putExtra("eventTitle", eventTitle);
+        i.putExtra("eventDescription", eventDescription);
+        startActivity(i);
+    }
+
+    public void onClick_EventActivity(View view){
+        Intent i = new Intent(this, EventActivity.class);
+        i.putExtra("eventId",eventId);
+        i.putExtra("eventTitle", eventTitle);
+        i.putExtra("eventDescription", eventDescription);
+        startActivity(i);
+    }
 
 
 }

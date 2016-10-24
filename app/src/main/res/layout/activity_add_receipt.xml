@@ -1,40 +1,145 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="pl.wozniakbartlomiej.receipt.Activities.AddReceiptActivity">
 
-    <EditText
-        android:id="@+id/editText_Title"
-        android:layout_width="match_parent"
-        android:layout_height="60sp"
-        android:hint="Input your title." />
-
-    <EditText
-        android:id="@+id/editText_Description"
-        android:layout_width="match_parent"
-        android:layout_height="60sp"
-        android:hint="Input your Description." />
-
-    <EditText
-        android:id="@+id/editText_Total"
-        android:inputType="number"
-        android:layout_width="match_parent"
-        android:layout_height="60sp"
-        android:hint="Input total." />
-
-    <FrameLayout
-        android:id="@+id/frameUsersForNewReceipt"
-        android:layout_width="match_parent"
-        android:layout_height="300px"/>
-
-    <Button
-        android:id="@+id/btn_newEvent"
+    <LinearLayout
+        android:id="@+id/headerLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="onClick_AddReceipt"
-        android:text="@string/btn_addReceipt" />
+        android:background="@drawable/border"
+        android:orientation="horizontal">
 
-</LinearLayout>
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:padding="10dp"
+            android:scaleType="fitStart"
+            android:src="@drawable/card" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Add receipt"
+            android:textColor="@color/colorWhite"
+            android:textSize="30dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/footerLaout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorMenuBottomForReceipt"
+        android:orientation="horizontal">
+
+
+        <ImageButton
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:onClick="onClick_BackToEvents"
+            android:padding="10dp"
+            android:src="@drawable/back" />
+
+        <ImageButton
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:padding="10dp"
+            android:src="@drawable/plus_white" />
+
+        <ImageButton
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:onClick="onClick_AddUser"
+            android:padding="10dp"
+            android:src="@drawable/adduser_black" />
+
+        <ImageButton
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:onClick="onClick_EventActivity"
+            android:padding="10dp"
+            android:src="@drawable/balance_black" />
+    </LinearLayout>
+     
+
+    <ScrollView
+        android:id="@+id/listview"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_above="@id/footerLaout"
+        android:layout_below="@id/headerLayout">
+
+        <LinearLayout
+            android:id="@+id/mainLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp">
+
+                <EditText
+                    android:id="@+id/editText_Title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Input your title"
+                    android:inputType="text" />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp">
+
+                <EditText
+                    android:id="@+id/editText_Description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Input your Description"
+                    android:inputType="text" />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp">
+                <EditText
+                    android:id="@+id/editText_Total"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Input total"
+                    android:inputType="number" />
+            </android.support.design.widget.TextInputLayout>
+            <FrameLayout
+                android:id="@+id/frameUsersForNewReceipt"
+                android:layout_width="match_parent"
+                android:layout_height="300px" />
+            <Button
+                android:id="@+id/btn_newEvent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="onClick_AddReceipt"
+                android:text="@string/btn_addReceipt" />
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>
+
+

@@ -59,7 +59,7 @@ public class UsersForReceiptAdapter extends BaseAdapter {
             listViewElement = (ListViewElement) convertView.getTag();
         }
         listViewElement.checkBox_IsChecked.setTag(position);
-        listViewElement.setEmail(currentUser.getEmail());
+        listViewElement.setEmail("Email: "+currentUser.getEmail());
         listViewElement.setCheckBox(currentUser.getIsChecked());
         return convertView;
     }

@@ -36,4 +36,20 @@ public class MainActivity extends AppCompatActivity {
         session = new UserSessionManager(getApplicationContext());
         session.checkLogin();
     }
+
+
+    public void btn_go_to_add_event_activity(View view){
+        Intent i = new Intent(this, AddEventActivity.class);
+        startActivity(i);
+    }
+
+    public void btn_go_to_balance_activity(View view){
+        Intent i = new Intent(this, BalanceActivity.class);
+        startActivity(i);
+    }
+
+    public void btn_go_to_user_activity(View view){
+        Intent i = new Intent(this, UserActivity.class);
+        startActivity(i);
+    }
 }

@@ -49,6 +49,8 @@ public class ReceiptActivity extends AppCompatActivity implements IServiceHelper
         }
     }
 
+
+
     public void onClick_EditReceipt(View view) {
         //Execute async method for add event.
         asyncTask = new UsersForNewReceiptServiceHelper(ReceiptActivity.this);
@@ -65,7 +67,7 @@ public class ReceiptActivity extends AppCompatActivity implements IServiceHelper
         try {
 
             //Redirect to ReceiptActivity
-            Intent i = new Intent(getApplicationContext(), ReceiptsActivity.class);
+            Intent i = new Intent(getApplicationContext(), EventActivity.class);
             i.putExtra("eventId", eventId);
             startActivity(i);
             finish();
@@ -154,6 +156,14 @@ public class ReceiptActivity extends AppCompatActivity implements IServiceHelper
         //Retrieve string for total.
         EditText editText_Total = (EditText) findViewById(R.id.editText_Total);
         editText_Total.setText(receiptTotal);
+    }
+
+
+    public void onClick_BackToEvents(View v){
+        Intent i = new Intent(getApplicationContext(), EventActivity.class);
+        i.putExtra("eventId", eventId);
+        startActivity(i);
+        finish();
     }
 
 

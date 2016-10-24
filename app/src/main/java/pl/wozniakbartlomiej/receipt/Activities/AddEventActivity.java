@@ -68,5 +68,20 @@ public class AddEventActivity extends AppCompatActivity implements IServiceHelpe
         return description;
     }
 
+    public void btn_go_to_events_activity(View view){
+        Intent i = new Intent(this, MainActivity.class);
+        startActivity(i);
+    }
+
+    public void btn_go_to_balance_activity(View view){
+        Intent i = new Intent(this, BalanceActivity.class);
+        startActivity(i);
+    }
+
+    public void btn_go_to_user_activity(View view){
+        Intent i = new Intent(this, UserActivity.class);
+        startActivity(i);
+    }
+
 }
 

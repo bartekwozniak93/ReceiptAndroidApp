@@ -67,15 +67,15 @@ public class EventsAdapter extends BaseAdapter {
                 Intent itent = new Intent(context, EventActivity.class);
                 itent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 itent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                itent.putExtra("id", currentEvent.getId());
-                itent.putExtra("title", currentEvent.getTitle());
-                itent.putExtra("description", currentEvent.getDescription());
+                itent.putExtra("eventId", currentEvent.getId());
+                itent.putExtra("eventTitle", currentEvent.getTitle());
+                itent.putExtra("eventDescription", currentEvent.getDescription());
                 context.startActivity(itent);
 
             }
         });
-        listViewElement.setTitle(currentEvent.getTitle());
-        listViewElement.setDescription(currentEvent.getDescription());
+        listViewElement.setTitle("Title: "+currentEvent.getTitle());
+        listViewElement.setDescription("Description: "+currentEvent.getDescription());
         listViewElement.setIcon(currentEvent.getImageId());
 
         return convertView;

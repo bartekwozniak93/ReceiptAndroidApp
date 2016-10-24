@@ -2,23 +2,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal"
-    android:background="@color/colorBlue"
+    android:orientation="vertical"
     tools:context=".Widgets.UserLogOutFragment">
 
     <TextView
-        android:layout_width="0px"
-        android:layout_weight="1"
-        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:id="@+id/textView_LoggedAs"
-        android:textColor="@color/colorWhite"
+        android:textColor="@color/colorBlue"
+        android:textSize="30dp"
         android:padding="3dp" />
     <Button
-        android:layout_width="0px"
-        android:layout_weight="1"
-        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:id="@+id/btn_logout"
-        android:onClick="onClick_Logout"
         android:text="@string/btn_logout" />
 
 

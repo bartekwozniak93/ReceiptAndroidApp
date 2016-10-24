@@ -75,10 +75,10 @@ public class ReceiptsAdapter extends BaseAdapter {
                 context.startActivity(itent);
             }
         });
-        listViewElement.setTitle(currentReceipt.getTitle());
-        listViewElement.setDescription(currentReceipt.getDescription());
+        listViewElement.setTitle("Title: "+currentReceipt.getTitle());
+        listViewElement.setDescription("Description: "+currentReceipt.getDescription());
         listViewElement.setIcon(currentReceipt.getImageId());
-        listViewElement.setTotal(currentReceipt.getTotal());
+        listViewElement.setTotal("Total: "+currentReceipt.getTotal());
 
         return convertView;
     }

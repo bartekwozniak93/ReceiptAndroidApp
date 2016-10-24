@@ -55,19 +55,7 @@ public class UsersAdapter extends BaseAdapter {
             listViewElement = (ListViewElement) convertView.getTag();
         }
 
-        //listViewElement.getItem().setOnClickListener(new View.OnClickListener() {
-        //    @Override
-        //    public void onClick(View v) {
-        //        //Intent itent = new Intent(context, EventActivity.class);
-        //        //itent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        //        //itent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        //        //itent.putExtra("id", currentListData.getId());
-        //        //itent.putExtra("email", currentListData.getEmail());
-        //        //itent.putExtra("description", currentListData.getDescription());
-        //        //context.startActivity(itent);
-//
-        //    }
-        //});
+
         listViewElement.setEmail(currentUser.getEmail());
 
         return convertView;

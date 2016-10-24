@@ -1,40 +1,120 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:orientation="vertical"
+tools:context="pl.wozniakbartlomiej.receipt.Activities.ReceiptActivity">
+
+<LinearLayout
+    android:id="@+id/headerLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="pl.wozniakbartlomiej.receipt.Activities.ReceiptActivity">
+    android:layout_height="wrap_content"
+    android:background="@drawable/border"
+    android:orientation="horizontal">
 
-    <EditText
-        android:id="@+id/editText_Title"
-        android:layout_width="match_parent"
-        android:layout_height="60sp"
-        android:hint="Input your title." />
-
-    <EditText
-        android:id="@+id/editText_Description"
-        android:layout_width="match_parent"
-        android:layout_height="60sp"
-        android:hint="Input your Description." />
-
-    <EditText
-        android:id="@+id/editText_Total"
-        android:inputType="number"
-        android:layout_width="match_parent"
-        android:layout_height="60sp"
-        android:hint="Input total." />
-
-    <FrameLayout
-        android:id="@+id/frameUsersForEditReceipt"
-        android:layout_width="match_parent"
-        android:layout_height="300px"/>
-
-    <Button
-        android:id="@+id/btn_editEvent"
-        android:layout_width="match_parent"
+    <ImageView
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:padding="10dp"
+        android:scaleType="fitStart"
+        android:src="@drawable/card" />
+    <TextView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="onClick_EditReceipt"
-        android:text="@string/btn_editReceipt" />
+        android:layout_gravity="center"
+        android:text="Event balance"
+        android:textColor="@color/colorWhite"
+        android:textSize="30dp" />
+</LinearLayout>
+<LinearLayout
+    android:id="@+id/footerLaout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:background="@color/colorMenuBottomForReceipt"
+    android:orientation="horizontal">
+
+
+    <ImageButton
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:onClick="onClick_BackToEvents"
+        android:padding="10dp"
+        android:src="@drawable/back" />
 
 </LinearLayout>
+ 
+
+<ScrollView
+    android:id="@+id/listview"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_above="@id/footerLaout"
+    android:layout_below="@id/headerLayout">
+
+    <LinearLayout
+        android:id="@+id/mainLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp">
+            <EditText android:id="@+id/editText_Title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:hint="Input your title" />
+        </android.support.design.widget.TextInputLayout>
+
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp">
+            <EditText android:id="@+id/editText_Description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:hint="Input your Description" />
+        </android.support.design.widget.TextInputLayout>
+
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp">
+            <EditText android:id="@+id/editText_Total"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:hint="Input total" />
+        </android.support.design.widget.TextInputLayout>
+
+        <FrameLayout
+            android:id="@+id/frameUsersForEditReceipt"
+            android:layout_width="match_parent"
+            android:layout_height="300px"/>
+
+        <Button
+            android:id="@+id/btn_editEvent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="onClick_EditReceipt"
+            android:text="@string/btn_editReceipt" />
+
+
+    </LinearLayout>
+
+</ScrollView>
+
+
+</RelativeLayout>
