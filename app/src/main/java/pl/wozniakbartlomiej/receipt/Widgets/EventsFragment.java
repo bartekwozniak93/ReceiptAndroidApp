@@ -106,7 +106,7 @@ public class EventsFragment extends Fragment implements IServiceHelper {
         event.setId(id);
         event.setTitle(title);
         event.setDescription(description);
-        event.setImageId(R.drawable.event_icon);
+        event.setImageId(R.drawable.event);
         eventsList.add(event);
     }
 }

@@ -38,14 +38,15 @@
             android:label="@string/app_name"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"
             tools:replace="android:theme" />
-        <activity android:name=".Activities.RegisterActivity" />
-        <activity android:name=".Activities.LoginActivity" />
+        <activity android:name=".Activities.RegisterActivity" android:theme="@style/AppThemeWithBar"/>
+        <activity android:name=".Activities.LoginActivity" android:theme="@style/AppThemeWithBar"/>
         <activity android:name=".Activities.CameraActivity" />
         <activity android:name=".Activities.AddEventActivity" />
         <activity android:name=".Activities.EventActivity" />
         <activity android:name=".Activities.AddReceiptActivity" />
         <activity android:name=".Activities.ReceiptsActivity" />
-        <activity android:name=".Activities.ReceiptActivity"></activity>
+        <activity android:name=".Activities.ReceiptActivity" />
+        <activity android:name=".Activities.EventQRActivity"></activity>
     </application>
 
 </manifest>

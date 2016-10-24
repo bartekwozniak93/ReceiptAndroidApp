@@ -23,8 +23,8 @@ import org.json.JSONObject;
 import java.util.Arrays;
 
 import pl.wozniakbartlomiej.receipt.R;
-import pl.wozniakbartlomiej.receipt.Services.ServiceHelper;
 import pl.wozniakbartlomiej.receipt.Services.IServiceHelper;
+import pl.wozniakbartlomiej.receipt.Services.ServiceHelper;
 import pl.wozniakbartlomiej.receipt.Services.UserServiceHelper;
 import pl.wozniakbartlomiej.receipt.Services.UserSessionManager;
 
@@ -190,6 +190,10 @@ public class LoginActivity extends AppCompatActivity implements IServiceHelper {
     public void onClick_Register(View view) {
         Intent myIntent = new Intent(this, RegisterActivity.class);
         startActivity(myIntent);
+    }
+
+    public void onClick_Facebook(View view){
+        loginFacebookButton.callOnClick();
     }
 
 

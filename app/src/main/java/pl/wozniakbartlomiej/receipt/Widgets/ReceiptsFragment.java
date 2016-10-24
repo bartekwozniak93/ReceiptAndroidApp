@@ -120,7 +120,7 @@ public class ReceiptsFragment extends Fragment implements IServiceHelper {
         receipt.setDescription(description);
         receipt.setTotal(total);
         receipt.setEventId(eventId);
-        receipt.setImageId(R.drawable.event_icon);
+        receipt.setImageId(R.drawable.receipt);
         receiptsList.add(receipt);
     }
 }
