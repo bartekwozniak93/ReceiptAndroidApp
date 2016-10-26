@@ -4,6 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:descendantFocusability="beforeDescendants"
+    android:focusableInTouchMode="true"
     tools:context="pl.wozniakbartlomiej.receipt.Activities.BalanceActivity">
 
     <LinearLayout
@@ -27,8 +29,6 @@
             android:text="Your balance"
             android:textColor="@color/colorWhite"
             android:textSize="30dp" />
-
-
     </LinearLayout>
 
 
@@ -46,7 +46,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:onClick="btn_go_to_add_event_activity"
+            android:onClick="onClick_GoToAddEventActivity"
             android:padding="10dp"
             android:src="@drawable/plus_black" />
 
@@ -55,7 +55,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:onClick="btn_go_to_events_activity"
+            android:onClick="onClick_GoToMainActivity"
             android:padding="10dp"
             android:src="@drawable/events_black" />
 
@@ -72,7 +72,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:onClick="btn_go_to_user_activity"
+            android:onClick="onClick_GoToUserActivity"
             android:padding="10dp"
             android:src="@drawable/user_black" />
     </LinearLayout>
@@ -90,9 +90,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-
-
-
         </LinearLayout>
 
     </ScrollView>

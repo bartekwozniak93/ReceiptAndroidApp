@@ -11,19 +11,34 @@ import pl.wozniakbartlomiej.receipt.R;
 import pl.wozniakbartlomiej.receipt.Services.EventServiceHelper;
 import pl.wozniakbartlomiej.receipt.Services.IServiceHelper;
 import pl.wozniakbartlomiej.receipt.Services.ServiceHelper;
+import pl.wozniakbartlomiej.receipt.Services.UserSessionManager;
 
+/**
+ * Activity to add Event.
+ */
 public class AddEventActivity extends AppCompatActivity implements IServiceHelper {
 
     private EventServiceHelper asyncTask;
+    private UserSessionManager session;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_event);
+        initSession();
     }
 
+    /**
+     * Init session for checking users permissions.
+     */
+    private void initSession(){
+        session = new UserSessionManager(getApplicationContext());
+        session.checkLogin();
+    }
+    /**
+     * Execute async method for add event.
+     */
     public void onClick_AddEvent(View view) {
-        //Execute async method for add event.
         asyncTask =new EventServiceHelper(AddEventActivity.this);
         asyncTask.delegate = this;
         asyncTask.setProcessDialog(getApplicationContext().getString(R.string.progress_dialog_header));
@@ -36,7 +51,6 @@ public class AddEventActivity extends AppCompatActivity implements IServiceHelpe
     @Override
     public void userServiceProcess(String result) {
         try {
-            ////Redirect to EventsActivity
             Intent i = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(i);
             finish();
@@ -68,17 +82,26 @@ public class AddEventActivity extends AppCompatActivity implements IServiceHelpe
         return description;
     }
 
-    public void btn_go_to_events_activity(View view){
+    /**
+     * Go to Events Activity
+     */
+    public void onClick_GoToMainActivity(View view){
         Intent i = new Intent(this, MainActivity.class);
         startActivity(i);
     }
 
-    public void btn_go_to_balance_activity(View view){
+    /**
+     * Go to Balance Activity
+     */
+    public void onClick_GoToBalanceActivity(View view){
         Intent i = new Intent(this, BalanceActivity.class);
         startActivity(i);
     }
 
-    public void btn_go_to_user_activity(View view){
+    /**
+     * Go to User Activity
+     */
+    public void onClick_GoToUserActivity(View view){
         Intent i = new Intent(this, UserActivity.class);
         startActivity(i);
     }

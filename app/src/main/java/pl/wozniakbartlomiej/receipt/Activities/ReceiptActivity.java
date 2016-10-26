@@ -9,10 +9,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import pl.wozniakbartlomiej.receipt.R;
 import pl.wozniakbartlomiej.receipt.Services.IServiceHelper;
 import pl.wozniakbartlomiej.receipt.Services.ServiceHelper;
+import pl.wozniakbartlomiej.receipt.Services.UserSessionManager;
 import pl.wozniakbartlomiej.receipt.Services.UsersForNewReceiptServiceHelper;
 import pl.wozniakbartlomiej.receipt.Widgets.UsersForEditReceiptFragment;
 
@@ -24,7 +26,9 @@ public class ReceiptActivity extends AppCompatActivity implements IServiceHelper
     private String receiptDescription;
     private String receiptTotal;
     private String eventId;
-
+    private String eventTitle;
+    private String eventDescription;
+    private UserSessionManager session;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +37,20 @@ public class ReceiptActivity extends AppCompatActivity implements IServiceHelper
         getExtrasFromIntent();
         addUsersForNewReceiptFragment();
         setValuesOnView();
+        setTextToViewElements();
+        initSession();
+    }
+
+    /**
+     * Init session for checking users permissions.
+     */
+    private void initSession(){
+        session = new UserSessionManager(getApplicationContext());
+        session.checkLogin();
+    }
+    private void  setTextToViewElements(){
+        TextView textView_Title = (TextView) findViewById(R.id.textView_Title);
+        textView_Title.setText(eventTitle+" : "+receiptTitle);
     }
 
     /**
@@ -46,6 +64,8 @@ public class ReceiptActivity extends AppCompatActivity implements IServiceHelper
             receiptDescription = getIntent().getExtras().getString("receiptDescription");
             receiptTotal = getIntent().getExtras().getString("receiptTotal");
             eventId = getIntent().getExtras().getString("eventId");
+            eventTitle = getIntent().getExtras().getString("eventTitle");
+            eventDescription = getIntent().getExtras().getString("eventDescription");
         }
     }
 
@@ -68,7 +88,9 @@ public class ReceiptActivity extends AppCompatActivity implements IServiceHelper
 
             //Redirect to ReceiptActivity
             Intent i = new Intent(getApplicationContext(), EventActivity.class);
-            i.putExtra("eventId", eventId);
+            i.putExtra("eventId",eventId);
+            i.putExtra("eventTitle", eventTitle);
+            i.putExtra("eventDescription", eventDescription);
             startActivity(i);
             finish();
         } catch (Exception e) {
@@ -159,9 +181,11 @@ public class ReceiptActivity extends AppCompatActivity implements IServiceHelper
     }
 
 
-    public void onClick_BackToEvents(View v){
+    public void onClick_GoToEventActivity(View v){
         Intent i = new Intent(getApplicationContext(), EventActivity.class);
-        i.putExtra("eventId", eventId);
+        i.putExtra("eventId",eventId);
+        i.putExtra("eventTitle", eventTitle);
+        i.putExtra("eventDescription", eventDescription);
         startActivity(i);
         finish();
     }

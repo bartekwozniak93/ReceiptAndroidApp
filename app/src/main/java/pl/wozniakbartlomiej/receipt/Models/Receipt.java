@@ -11,6 +11,8 @@ public class Receipt {
     private String description;
     private String total;
     private String eventId;
+    private String eventTitle;
+    private String eventDescription;
     private int imageId;
 
     public String getId() {
@@ -51,6 +53,22 @@ public class Receipt {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getEventTitle() {
+        return eventTitle;
+    }
+
+    public void setEventTitle(String eventTitle) {
+        this.eventTitle = eventTitle;
+    }
+
+    public String getEventDescription() {
+        return eventDescription;
+    }
+
+    public void setEventDescription(String eventDescription) {
+        this.eventDescription = eventDescription;
     }
 
     public int getImageId() {

@@ -70,7 +70,6 @@ public class UsersForReceiptAdapter extends BaseAdapter {
         private TextView textView_Email;
         private CheckBox checkBox_IsChecked;
 
-
         public ListViewElement(View item) {
             layout_Item = (LinearLayout) item.findViewById(R.id.item);
             textView_Email = (TextView) item.findViewById(R.id.email);

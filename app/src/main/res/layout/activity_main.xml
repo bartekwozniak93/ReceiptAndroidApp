@@ -4,6 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:descendantFocusability="beforeDescendants"
+    android:focusableInTouchMode="true"
     tools:context="pl.wozniakbartlomiej.receipt.Activities.MainActivity">
 
     <LinearLayout
@@ -45,7 +47,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:onClick="btn_go_to_add_event_activity"
+            android:onClick="onClick_GoToAddEventActivity"
             android:padding="10dp"
             android:src="@drawable/plus_black" />
 
@@ -62,7 +64,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:onClick="btn_go_to_balance_activity"
+            android:onClick="onClick_GoToBalanceActivity"
             android:padding="10dp"
             android:src="@drawable/balance_black" />
 
@@ -71,7 +73,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:onClick="btn_go_to_user_activity"
+            android:onClick="onClick_GoToUserActivity"
             android:padding="10dp"
             android:src="@drawable/user_black" />
     </LinearLayout>

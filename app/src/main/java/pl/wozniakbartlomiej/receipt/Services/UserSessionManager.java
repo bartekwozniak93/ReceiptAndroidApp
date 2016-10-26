@@ -20,7 +20,6 @@ public class UserSessionManager {
     int PRIVATE_MODE = 0;
     static final String PREF_NAME = "ApplicationPreferences";
     static final String TOKEN_PREFIX = "JWT ";
-
     /**
      * Enum keys for properties.
      * */

@@ -8,6 +8,9 @@
     <color name="colorRed">#ff6666</color>
     <color name="colorOrange">#ffd966</color>
     <color name="colorWhite">#ffffff</color>
+    <color name="colorReceiptListElement">#19334d</color>
+    <color name="colorUserListElement">#19334d</color>
+    <color name="colorEventListElement">#19334d</color>
     <color name="colorMenuBottom">#ffd966</color>
     <color name="colorMenuBottomForReceipt">#ff6666</color>
 </resources>

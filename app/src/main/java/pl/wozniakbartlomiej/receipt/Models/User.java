@@ -7,6 +7,7 @@ public class User {
     private String id;
     private String email;
     private boolean isChecked;
+    private String amount;
 
     public String getId() {
         return id;
@@ -14,6 +15,14 @@ public class User {
 
     public void setId(String id) {
         this.id= id;
+    }
+
+    public void setAmount(String amount) {
+        this.amount= amount;
+    }
+
+    public String getAmount() {
+        return amount;
     }
 
     public String getEmail() {

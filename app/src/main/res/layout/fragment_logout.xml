@@ -6,17 +6,16 @@
     tools:context=".Widgets.UserLogOutFragment">
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:id="@+id/textView_LoggedAs"
-        android:textColor="@color/colorBlue"
-        android:textSize="30dp"
-        android:padding="3dp" />
-    <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:padding="3dp"
+        android:textColor="@color/colorBlue"
+        android:textSize="30dp" />
+
+    <Button
         android:id="@+id/btn_logout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:text="@string/btn_logout" />
-
-
 </LinearLayout>

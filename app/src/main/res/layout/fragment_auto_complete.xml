@@ -11,9 +11,10 @@
         android:orientation="horizontal">
 
         <FrameLayout
-            android:layout_weight="3"
             android:layout_width="0px"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_weight="3">
+
             <pl.wozniakbartlomiej.receipt.Widgets.AutoCompleteDelayTextView
                 android:id="@+id/autocomplete_addUser"
                 android:layout_width="match_parent"
@@ -32,9 +33,9 @@
 
         <Button
             android:id="@+id/btn_addUser"
-            android:layout_weight="1"
             android:layout_width="0px"
             android:layout_height="match_parent"
+            android:layout_weight="1"
             android:text="Add User" />
     </LinearLayout>
 

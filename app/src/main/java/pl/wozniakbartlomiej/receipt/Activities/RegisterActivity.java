@@ -17,6 +17,9 @@ import pl.wozniakbartlomiej.receipt.Services.ServiceHelper;
 import pl.wozniakbartlomiej.receipt.Services.UserSessionManager;
 import pl.wozniakbartlomiej.receipt.Services.UserServiceHelper;
 
+/**
+ * Activity for register with local account
+ */
 public class RegisterActivity extends AppCompatActivity implements IServiceHelper {
 
     private UserServiceHelper asyncTask;

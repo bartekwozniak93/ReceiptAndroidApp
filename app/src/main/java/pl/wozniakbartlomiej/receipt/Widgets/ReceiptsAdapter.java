@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -72,12 +71,13 @@ public class ReceiptsAdapter extends BaseAdapter {
                 itent.putExtra("receiptDescription", currentReceipt.getDescription());
                 itent.putExtra("receiptTotal", currentReceipt.getTotal());
                 itent.putExtra("eventId", currentReceipt.getEventId());
+                itent.putExtra("eventTitle", currentReceipt.getEventTitle());
+                itent.putExtra("eventDescription", currentReceipt.getDescription());
                 context.startActivity(itent);
             }
         });
         listViewElement.setTitle("Title: "+currentReceipt.getTitle());
         listViewElement.setDescription("Description: "+currentReceipt.getDescription());
-        listViewElement.setIcon(currentReceipt.getImageId());
         listViewElement.setTotal("Total: "+currentReceipt.getTotal());
 
         return convertView;
@@ -89,14 +89,12 @@ public class ReceiptsAdapter extends BaseAdapter {
         private TextView textView_Title;
         private TextView textView_Description;
         private TextView textView_Total;
-        private ImageView imageView_Icon;
 
         public ListViewElement(View item) {
             layout_Item = (LinearLayout) item.findViewById(R.id.item);
             textView_Title = (TextView) item.findViewById(R.id.title);
             textView_Description = (TextView) item.findViewById(R.id.description);
             textView_Total = (TextView) item.findViewById(R.id.total);
-            imageView_Icon = (ImageView) item.findViewById(R.id.icon);
         }
 
         public void setTitle(String text) {
@@ -111,9 +109,6 @@ public class ReceiptsAdapter extends BaseAdapter {
             textView_Total.setText(text);
         }
 
-        public void setIcon(int imageId) {
-            imageView_Icon.setImageResource(imageId);
-        }
 
         public LinearLayout getItem() {
             return layout_Item;

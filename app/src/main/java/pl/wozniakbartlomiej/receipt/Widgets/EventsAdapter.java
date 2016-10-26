@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -76,7 +75,6 @@ public class EventsAdapter extends BaseAdapter {
         });
         listViewElement.setTitle("Title: "+currentEvent.getTitle());
         listViewElement.setDescription("Description: "+currentEvent.getDescription());
-        listViewElement.setIcon(currentEvent.getImageId());
 
         return convertView;
     }
@@ -86,13 +84,11 @@ public class EventsAdapter extends BaseAdapter {
         private LinearLayout layout_Item;
         private TextView textView_Title;
         private TextView textView_Description;
-        private ImageView imageView_Icon;
 
         public ListViewElement(View item) {
             layout_Item = (LinearLayout) item.findViewById(R.id.item);
             textView_Title = (TextView) item.findViewById(R.id.title);
             textView_Description = (TextView) item.findViewById(R.id.description);
-            imageView_Icon = (ImageView) item.findViewById(R.id.icon);
         }
 
         public void setTitle(String text) {
@@ -101,10 +97,6 @@ public class EventsAdapter extends BaseAdapter {
 
         public void setDescription(String text) {
             textView_Description.setText(text);
-        }
-
-        public void setIcon(int imageId) {
-            imageView_Icon.setImageResource(imageId);
         }
 
         public LinearLayout getItem() {

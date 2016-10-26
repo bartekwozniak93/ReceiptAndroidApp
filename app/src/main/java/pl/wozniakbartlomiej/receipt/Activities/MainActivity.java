@@ -19,16 +19,6 @@ public class MainActivity extends AppCompatActivity {
         initSession();
     }
 
-    //public void onClick_Camera(View view){
-    //    Intent i = new Intent(this, CameraActivity.class);
-    //    startActivity(i);
-    //}
-
-    public void onClick_NewEvent(View view){
-        Intent i = new Intent(this, AddEventActivity.class);
-        startActivity(i);
-    }
-
     /**
      * Init session for checking users permissions.
      */
@@ -37,18 +27,26 @@ public class MainActivity extends AppCompatActivity {
         session.checkLogin();
     }
 
-
-    public void btn_go_to_add_event_activity(View view){
+    /**
+     * Go to AddEvent Activity
+     */
+    public void onClick_GoToAddEventActivity(View view){
         Intent i = new Intent(this, AddEventActivity.class);
         startActivity(i);
     }
 
-    public void btn_go_to_balance_activity(View view){
+    /**
+     * Go to Balance Activity
+     */
+    public void onClick_GoToBalanceActivity(View view){
         Intent i = new Intent(this, BalanceActivity.class);
         startActivity(i);
     }
 
-    public void btn_go_to_user_activity(View view){
+    /**
+     * Go to User Activity
+     */
+    public void onClick_GoToUserActivity(View view){
         Intent i = new Intent(this, UserActivity.class);
         startActivity(i);
     }

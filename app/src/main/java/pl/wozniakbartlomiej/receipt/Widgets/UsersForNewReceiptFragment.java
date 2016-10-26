@@ -28,6 +28,7 @@ public class UsersForNewReceiptFragment extends android.app.Fragment implements 
     private ListView listView;
     private ArrayList<User> usersList;
     private String eventId;
+    private UsersForReceiptAdapter adapter;
     static UsersForNewReceiptFragment usersFragmentForNewReceipt;
 
     public UsersForNewReceiptFragment() {
@@ -44,6 +45,8 @@ public class UsersForNewReceiptFragment extends android.app.Fragment implements 
         usersFragmentForNewReceipt = this;
         return view;
     }
+
+
 
     public static UsersForNewReceiptFragment getInstance() {
         return usersFragmentForNewReceipt;
@@ -85,7 +88,8 @@ public class UsersForNewReceiptFragment extends android.app.Fragment implements 
     @Override
     public void userServiceProcess(String result) {
         extractJson(result);
-        listView.setAdapter(new UsersForReceiptAdapter(getActivity().getApplicationContext(), usersList));
+        adapter= new UsersForReceiptAdapter(getActivity().getApplicationContext(), usersList);
+        listView.setAdapter(adapter);
     }
 
     /**
@@ -133,4 +137,16 @@ public class UsersForNewReceiptFragment extends android.app.Fragment implements 
         }
         return map;
     }
+
+    public int getNumberOfCheckedUsers(){
+        int nCheckedUsers=0;
+        for (int i = 0; i < usersList.size(); i++)
+        {
+            if(usersList.get(i).getIsChecked())
+                nCheckedUsers++;
+        }
+        return nCheckedUsers;
+    }
+
+
 }

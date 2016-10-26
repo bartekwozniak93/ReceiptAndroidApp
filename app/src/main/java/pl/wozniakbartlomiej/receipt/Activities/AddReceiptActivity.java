@@ -9,19 +9,25 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import pl.wozniakbartlomiej.receipt.R;
 import pl.wozniakbartlomiej.receipt.Services.IServiceHelper;
 import pl.wozniakbartlomiej.receipt.Services.ServiceHelper;
+import pl.wozniakbartlomiej.receipt.Services.UserSessionManager;
 import pl.wozniakbartlomiej.receipt.Services.UsersForNewReceiptServiceHelper;
 import pl.wozniakbartlomiej.receipt.Widgets.UsersForNewReceiptFragment;
 
+/**
+ * Activity to add Receipt to Event.
+ */
 public class AddReceiptActivity extends AppCompatActivity implements IServiceHelper {
 
     private UsersForNewReceiptServiceHelper asyncTask;
     private String eventId;
     private String eventTitle;
     private String eventDescription;
+    private UserSessionManager session;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,26 +35,45 @@ public class AddReceiptActivity extends AppCompatActivity implements IServiceHel
         setContentView(R.layout.activity_add_receipt);
         getExtrasFromIntent();
         addUsersForNewReceiptFragment();
+        setTitleOnView();
+        initSession();
     }
 
     /**
+     * Init session for checking users permissions.
+     */
+    private void initSession(){
+        session = new UserSessionManager(getApplicationContext());
+        session.checkLogin();
+    }
+    /**
      * Get extras from Intent.
      */
-    private void getExtrasFromIntent(){
+    private void getExtrasFromIntent() {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            eventId=getIntent().getExtras().getString("eventId");
-            eventTitle=getIntent().getExtras().getString("eventTitle");
-            eventDescription=getIntent().getExtras().getString("eventDescription");
+            eventId = getIntent().getExtras().getString("eventId");
+            eventTitle = getIntent().getExtras().getString("eventTitle");
+            eventDescription = getIntent().getExtras().getString("eventDescription");
         }
     }
 
+    /**
+     * Set Title on View.
+     */
+    private void setTitleOnView() {
+        TextView textView_Title = (TextView) findViewById(R.id.textView_Title);
+        textView_Title.setText(eventTitle);
+    }
+
+    /**
+     * Execute async method for add event.
+     */
     public void onClick_AddReceipt(View view) {
-        //Execute async method for add event.
-        asyncTask =new UsersForNewReceiptServiceHelper(AddReceiptActivity.this);
+        asyncTask = new UsersForNewReceiptServiceHelper(AddReceiptActivity.this);
         asyncTask.delegate = this;
         asyncTask.setProcessDialog(getApplicationContext().getString(R.string.progress_dialog_header));
-        asyncTask.execute(ServiceHelper.POST_METHOD, ServiceHelper.getNewReceiptString(),getTitleFromView(), getDescriptionFromView(), eventId, getTotalFromView());
+        asyncTask.execute(ServiceHelper.POST_METHOD, ServiceHelper.getNewReceiptString(), getTitleFromView(), getDescriptionFromView(), eventId, getTotalFromView());
     }
 
     /**
@@ -57,7 +82,6 @@ public class AddReceiptActivity extends AppCompatActivity implements IServiceHel
     @Override
     public void userServiceProcess(String result) {
         try {
-
             //Redirect to EventsActivity
             Intent i = new Intent(getApplicationContext(), EventActivity.class);
             i.putExtra("eventId", eventId);
@@ -65,8 +89,7 @@ public class AddReceiptActivity extends AppCompatActivity implements IServiceHel
             i.putExtra("eventDescription", eventDescription);
             startActivity(i);
             finish();
-        }
-        catch(Exception e){
+        } catch (Exception e) {
             Log.d("RegisterActivity", e.getMessage());
         }
     }
@@ -74,8 +97,7 @@ public class AddReceiptActivity extends AppCompatActivity implements IServiceHel
     /**
      * Get Title From View
      */
-    private String getTitleFromView()
-    {
+    private String getTitleFromView() {
         //Retrieve string for Title.
         EditText editText_Title = (EditText) findViewById(R.id.editText_Title);
         String title = editText_Title.getText().toString().toLowerCase();
@@ -106,7 +128,7 @@ public class AddReceiptActivity extends AppCompatActivity implements IServiceHel
      * Check if there's already UsersForNewReceiptFragment added.
      * If not, add.
      */
-    private void addUsersForNewReceiptFragment(){
+    private void addUsersForNewReceiptFragment() {
         if (findViewById(R.id.frameUsersForNewReceipt) != null) {
             FragmentManager fragmentManager = getFragmentManager();
             FragmentTransaction fragmentTransaction;
@@ -122,27 +144,35 @@ public class AddReceiptActivity extends AppCompatActivity implements IServiceHel
         }
     }
 
-
-    public void onClick_BackToEvents(View view){
+    /**
+     * Go to Main Activity
+     */
+    public void onClick_GoToMainActivity(View view) {
         Intent i = new Intent(this, MainActivity.class);
         startActivity(i);
     }
 
-    public void onClick_AddUser(View view){
+    /**
+     * Go to Add User Activity
+     */
+    public void onClick_GoToAddUser(View view) {
         Intent i = new Intent(this, AddUserActivity.class);
-        i.putExtra("eventId",eventId);
+        i.putExtra("eventId", eventId);
         i.putExtra("eventTitle", eventTitle);
         i.putExtra("eventDescription", eventDescription);
         startActivity(i);
     }
 
-    public void onClick_EventActivity(View view){
+    /**
+     * Go to Event Activity
+     */
+    public void onClick_GoToEventActivity(View view) {
         Intent i = new Intent(this, EventActivity.class);
-        i.putExtra("eventId",eventId);
+        i.putExtra("eventId", eventId);
         i.putExtra("eventTitle", eventTitle);
         i.putExtra("eventDescription", eventDescription);
         startActivity(i);
     }
-
 
 }
+

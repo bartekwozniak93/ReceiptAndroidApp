@@ -3,8 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:descendantFocusability="beforeDescendants"
+    android:focusableInTouchMode="true"
     android:orientation="vertical"
     tools:context="pl.wozniakbartlomiej.receipt.Activities.AddEventActivity">
+
     <LinearLayout
         android:id="@+id/headerLayout"
         android:layout_width="match_parent"
@@ -27,6 +30,7 @@
             android:textColor="@color/colorWhite"
             android:textSize="30dp" />
     </LinearLayout>
+
     <LinearLayout
         android:id="@+id/footerLaout"
         android:layout_width="match_parent"
@@ -49,7 +53,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:onClick="btn_go_to_events_activity"
+            android:onClick="onClick_GoToMainActivity"
             android:padding="10dp"
             android:src="@drawable/events_black" />
 
@@ -58,7 +62,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:onClick="btn_go_to_balance_activity"
+            android:onClick="onClick_GoToBalanceActivity"
             android:padding="10dp"
             android:src="@drawable/balance_black" />
 
@@ -67,7 +71,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:onClick="btn_go_to_user_activity"
+            android:onClick="onClick_GoToUserActivity"
             android:padding="10dp"
             android:src="@drawable/user_black" />
     </LinearLayout>
@@ -90,6 +94,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
                 android:layout_marginTop="5dp">
+
                 <EditText
                     android:id="@+id/editText_Title"
                     android:layout_width="match_parent"
@@ -103,6 +108,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
                 android:layout_marginTop="5dp">
+
                 <EditText
                     android:id="@+id/editText_Description"
                     android:layout_width="match_parent"

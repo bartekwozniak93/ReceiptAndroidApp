@@ -7,16 +7,22 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.TextView;
 
 import pl.wozniakbartlomiej.receipt.R;
+import pl.wozniakbartlomiej.receipt.Services.UserSessionManager;
 import pl.wozniakbartlomiej.receipt.Widgets.AutoCompleteFragment;
 import pl.wozniakbartlomiej.receipt.Widgets.UsersFragment;
 
+/**
+ * Activity to add User to Event.
+ */
 public class AddUserActivity extends AppCompatActivity {
 
     private String eventId;
     private String eventTitle;
     private String eventDescription;
+    private UserSessionManager session;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,8 +30,17 @@ public class AddUserActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_user);
         getExtrasFromIntent();
         addFragmentsToView();
+        setTitleOnView();
+        initSession();
     }
 
+    /**
+     * Init session for checking users permissions.
+     */
+    private void initSession(){
+        session = new UserSessionManager(getApplicationContext());
+        session.checkLogin();
+    }
     /**
      * Get extras from Intent.
      */
@@ -38,22 +53,31 @@ public class AddUserActivity extends AppCompatActivity {
         }
     }
 
-    public void onClick_BackToEvents(View view){
-        Intent i = new Intent(this, MainActivity.class);
-        startActivity(i);
+    /**
+     * Set Title on View.
+     */
+    private void setTitleOnView() {
+        TextView textView_Title = (TextView) findViewById(R.id.textView_Title);
+        textView_Title.setText(eventTitle);
     }
 
-    public void onClick_AddReceipt(View view){
+    /**
+     * Go to Add Receipt Activity.
+     */
+    public void onClick_GoToAddReceiptActivity(View view) {
         Intent i = new Intent(this, AddReceiptActivity.class);
-        i.putExtra("eventId",eventId);
+        i.putExtra("eventId", eventId);
         i.putExtra("eventTitle", eventTitle);
         i.putExtra("eventDescription", eventDescription);
         startActivity(i);
     }
 
-    public void onClick_EventActivity(View view){
+    /**
+     * Go to Event Activity.
+     */
+    public void onClick_GoToEventActivity(View view) {
         Intent i = new Intent(this, EventActivity.class);
-        i.putExtra("eventId",eventId);
+        i.putExtra("eventId", eventId);
         i.putExtra("eventTitle", eventTitle);
         i.putExtra("eventDescription", eventDescription);
         startActivity(i);
@@ -62,7 +86,7 @@ public class AddUserActivity extends AppCompatActivity {
     /**
      * Add fragments to View.
      */
-    private void addFragmentsToView(){
+    private void addFragmentsToView() {
         addAddedUsersFragment();
         addAutoCompleteFragment();
     }
@@ -71,7 +95,7 @@ public class AddUserActivity extends AppCompatActivity {
      * Check if there's already UsersFragment added.
      * If not, add.
      */
-    private void addAddedUsersFragment(){
+    private void addAddedUsersFragment() {
         if (findViewById(R.id.frameAddedUsersLayout) != null) {
             FragmentManager fragmentManager = getFragmentManager();
             FragmentTransaction fragmentTransaction;
@@ -89,7 +113,7 @@ public class AddUserActivity extends AppCompatActivity {
      * Check if there's already AutoCompleteFragment added.
      * If not, add.
      */
-    private void addAutoCompleteFragment(){
+    private void addAutoCompleteFragment() {
         if (findViewById(R.id.frameAutoCompleteLayout) != null) {
             FragmentManager fragmentManager = getFragmentManager();
             FragmentTransaction fragmentTransaction;
@@ -102,5 +126,4 @@ public class AddUserActivity extends AppCompatActivity {
             fragmentTransaction.commit();
         }
     }
-
 }

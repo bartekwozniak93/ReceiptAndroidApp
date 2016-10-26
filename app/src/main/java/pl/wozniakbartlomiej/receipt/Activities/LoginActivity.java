@@ -28,6 +28,9 @@ import pl.wozniakbartlomiej.receipt.Services.ServiceHelper;
 import pl.wozniakbartlomiej.receipt.Services.UserServiceHelper;
 import pl.wozniakbartlomiej.receipt.Services.UserSessionManager;
 
+/**
+ * Activity for login with local or fb account
+ */
 public class LoginActivity extends AppCompatActivity implements IServiceHelper {
 
     //Button for facebook login
@@ -191,10 +194,5 @@ public class LoginActivity extends AppCompatActivity implements IServiceHelper {
         Intent myIntent = new Intent(this, RegisterActivity.class);
         startActivity(myIntent);
     }
-
-    public void onClick_Facebook(View view){
-        loginFacebookButton.callOnClick();
-    }
-
 
 }
