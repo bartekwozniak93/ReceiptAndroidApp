@@ -32,12 +32,31 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/footerLaout"
+        android:id="@+id/footerLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="@color/colorMenuBottom"
-        android:orientation="horizontal">
+        android:orientation="vertical">
+
+        <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <Button
+            android:id="@+id/onClick_getQrCode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:onClick="onClick_GoToQRFromCameraActivity"
+            android:text="@string/btn_addEventByQR" />
+    </LinearLayout>
+
+        <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/colorMenuBottom">
 
 
         <ImageButton
@@ -75,12 +94,12 @@
             android:padding="10dp"
             android:src="@drawable/user_black" />
     </LinearLayout>
-
+    </LinearLayout>
     <ScrollView
         android:id="@+id/listview"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_above="@id/footerLaout"
+        android:layout_above="@id/footerLayout"
         android:layout_below="@id/headerLayout">
 
         <LinearLayout

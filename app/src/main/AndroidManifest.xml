@@ -51,7 +51,9 @@
         <activity android:name=".Activities.ReceiptActivity" />
         <activity android:name=".Activities.BalanceActivity" />
         <activity android:name=".Activities.UserActivity" />
-        <activity android:name=".Activities.AddUserActivity"></activity>
+        <activity android:name=".Activities.AddUserActivity" />
+        <activity android:name=".Activities.QRFromCameraActivity" />
+        <activity android:name=".Activities.QrCodeEventActivity"></activity>
     </application>
 
 </manifest>

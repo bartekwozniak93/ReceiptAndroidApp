@@ -179,4 +179,16 @@ public class EventActivity extends AppCompatActivity implements IServiceHelper{
         startActivity(i);
     }
 
+    /**
+     * Go to view
+     * to get QRCode
+     */
+    public void onClick_getQrCode(View view){
+        Intent i = new Intent(this, QrCodeEventActivity.class);
+        i.putExtra("eventId",eventId);
+        i.putExtra("eventTitle", eventTitle);
+        i.putExtra("eventDescription", eventDescription);
+        startActivity(i);
+    }
+
 }

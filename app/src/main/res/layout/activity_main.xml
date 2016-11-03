@@ -3,9 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:descendantFocusability="beforeDescendants"
     android:focusableInTouchMode="true"
+    android:orientation="vertical"
     tools:context="pl.wozniakbartlomiej.receipt.Activities.MainActivity">
 
     <LinearLayout
@@ -35,59 +35,58 @@
 
 
     <LinearLayout
-        android:id="@+id/footerLaout"
+        android:id="@+id/footerLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="@color/colorMenuBottom"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:background="@color/colorMenuBottom">
 
-        <ImageButton
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:onClick="onClick_GoToAddEventActivity"
-            android:padding="10dp"
-            android:src="@drawable/plus_black" />
 
-        <ImageButton
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:padding="10dp"
-            android:src="@drawable/events_white" />
+            <ImageButton
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:onClick="onClick_GoToAddEventActivity"
+                android:padding="10dp"
+                android:src="@drawable/plus_black" />
 
-        <ImageButton
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:onClick="onClick_GoToBalanceActivity"
-            android:padding="10dp"
-            android:src="@drawable/balance_black" />
+            <ImageButton
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:padding="10dp"
+                android:src="@drawable/events_white" />
 
-        <ImageButton
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:onClick="onClick_GoToUserActivity"
-            android:padding="10dp"
-            android:src="@drawable/user_black" />
-    </LinearLayout>
-     
+            <ImageButton
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:onClick="onClick_GoToBalanceActivity"
+                android:padding="10dp"
+                android:src="@drawable/balance_black" />
+
+            <ImageButton
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:onClick="onClick_GoToUserActivity"
+                android:padding="10dp"
+                android:src="@drawable/user_black" />
+        </LinearLayout>
+         
 
     <fragment
         android:id="@+id/listview"
         android:name="pl.wozniakbartlomiej.receipt.Widgets.EventsFragment"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_above="@id/footerLaout"
+        android:layout_above="@id/footerLayout"
         android:layout_below="@id/headerLayout" />
-
-
 </RelativeLayout>
 
 

@@ -41,60 +41,78 @@
                 android:textColor="@color/colorWhite"
                 android:textSize="20dp" />
         </LinearLayout>
-
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/footerLaout"
+        android:id="@+id/footerLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="@color/colorMenuBottomForReceipt"
-        android:orientation="horizontal">
+        android:orientation="vertical">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
 
-        <ImageButton
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            <Button
+                android:id="@+id/onClick_getQrCode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:onClick="onClick_getQrCode"
+                android:text="@string/btn_getQRCode" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
             android:layout_weight="1"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:onClick="onClick_GoToMainActivity"
-            android:padding="10dp"
-            android:src="@drawable/back" />
+            android:background="@color/colorMenuBottomForReceipt">
 
-        <ImageButton
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:onClick="onClick_GoToAddReceiptActivity"
-            android:padding="10dp"
-            android:src="@drawable/plus_black" />
+            <ImageButton
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:onClick="onClick_GoToMainActivity"
+                android:padding="10dp"
+                android:src="@drawable/back" />
 
-        <ImageButton
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:onClick="onClick_GoToAddUser"
-            android:padding="10dp"
-            android:src="@drawable/adduser_black" />
+            <ImageButton
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:onClick="onClick_GoToAddReceiptActivity"
+                android:padding="10dp"
+                android:src="@drawable/plus_black" />
 
-        <ImageButton
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:padding="10dp"
-            android:src="@drawable/balance_white" />
+            <ImageButton
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:onClick="onClick_GoToAddUser"
+                android:padding="10dp"
+                android:src="@drawable/adduser_black" />
+
+            <ImageButton
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:padding="10dp"
+                android:src="@drawable/balance_white" />
+        </LinearLayout>
+         
     </LinearLayout>
-     
 
     <ListView
         android:id="@+id/eventReceiptsList"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_above="@id/footerLaout"
+        android:layout_above="@id/footerLayout"
         android:layout_below="@id/headerLayout" />
 
 </RelativeLayout>

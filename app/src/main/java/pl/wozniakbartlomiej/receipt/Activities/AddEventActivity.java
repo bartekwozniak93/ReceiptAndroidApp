@@ -106,5 +106,13 @@ public class AddEventActivity extends AppCompatActivity implements IServiceHelpe
         startActivity(i);
     }
 
+    /**
+     * Go to QR From Camera Activity
+     */
+    public void onClick_GoToQRFromCameraActivity(View view){
+        Intent i = new Intent(this, QRFromCameraActivity.class);
+        startActivity(i);
+    }
+
 }
 
