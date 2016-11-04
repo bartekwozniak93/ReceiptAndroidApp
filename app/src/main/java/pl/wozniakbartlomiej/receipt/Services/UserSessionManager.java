@@ -68,6 +68,16 @@ public class UserSessionManager {
         }
     }
 
+    public void checkResult(String result){
+        if(result==null) {
+            // Clearing all data from Shared Preferences
+            editor.clear();
+            editor.commit();
+            // After logout redirect user to Loing Activity
+            goToLoginActivity();
+        }
+    }
+
     /**
      * Clear session details
      * */

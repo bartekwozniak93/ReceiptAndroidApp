@@ -148,6 +148,7 @@ public class LoginActivity extends AppCompatActivity implements IServiceHelper {
      */
     @Override
     public void userServiceProcess(String result) {
+        session.checkResult(result);
         try {
             if(progressDialog!=null)
                 progressDialog.dismiss();

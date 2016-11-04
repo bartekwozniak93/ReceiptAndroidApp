@@ -41,6 +41,8 @@ public class ServiceHelper {
     public static String PARAMS_EMAIL = "email";
     public static String PARAMS_PASSWORD = "password";
     public static String PARAMS_RECEIPT_ID = "receiptId";
+    public static String PARAMS_LATITUDE = "latitude";
+    public static String PARAMS_LOGITUDE = "longitude";
 
     public static String POST_METHOD = "POST";
     public static String GET_METHOD = "GET";
@@ -164,10 +166,10 @@ public class ServiceHelper {
             }
         } catch (IOException e) {
             e.printStackTrace();
+            return null;
         } finally {
             httpURLConnection.disconnect();
         }
-
         return stringBuilder.toString();
     }
 

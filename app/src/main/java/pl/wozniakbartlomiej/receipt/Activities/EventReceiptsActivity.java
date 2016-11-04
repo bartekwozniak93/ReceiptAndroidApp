@@ -109,6 +109,7 @@ public class EventReceiptsActivity extends AppCompatActivity implements IService
      */
     @Override
     public void userServiceProcess(String result) {
+        session.checkResult(result);
         extractJson(result);
         listView.setAdapter(new ReceiptsAdapter(EventReceiptsActivity.this, receiptsList));
     }

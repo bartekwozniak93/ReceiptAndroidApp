@@ -111,6 +111,7 @@ public class EventFromQrCodeActivity extends AppCompatActivity implements IServi
 
     @Override
     public void userServiceProcess(String result) {
+        session.checkResult(result);
         Intent i = new Intent(this, UserEventsActivity.class);
         Toast.makeText(this, result, Toast.LENGTH_LONG).show();
         startActivity(i);

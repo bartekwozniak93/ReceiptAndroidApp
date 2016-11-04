@@ -51,6 +51,8 @@ public class EventServiceHelper  extends AsyncTask<String, Void, String> {
         String description = ServiceHelper.getParam(3, params);
         String eventId = ServiceHelper.getParam(4, params);
         String userEmail = ServiceHelper.getParam(5, params);
+        String longitude= ServiceHelper.getParam(6, params);
+        String latitude= ServiceHelper.getParam(7, params);
         HashMap<String, String> requestParameters = new HashMap<>();
         requestParameters.put(ServiceHelper.PARAMS_TITLE, title);
         requestParameters.put(ServiceHelper.PARAMS_DESCRIPTION, description);
@@ -58,6 +60,8 @@ public class EventServiceHelper  extends AsyncTask<String, Void, String> {
         requestParameters.put(ServiceHelper.PARAMS_EVENT_ID, eventId);
         requestParameters.put(ServiceHelper.PARAMS_USER_TO_ADD, userEmail);
         requestParameters.put(ServiceHelper.PARAMS_USER, session.getProperty(UserSessionManager.SessionKey.EMAIL));
+        requestParameters.put(ServiceHelper.PARAMS_LATITUDE, latitude);
+        requestParameters.put(ServiceHelper.PARAMS_LOGITUDE, longitude);
         return requestParameters;
     }
 

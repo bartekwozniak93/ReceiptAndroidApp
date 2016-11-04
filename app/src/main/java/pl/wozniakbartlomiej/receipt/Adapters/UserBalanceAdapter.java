@@ -56,7 +56,7 @@ public class UserBalanceAdapter extends BaseAdapter {
             listViewElement = (ListViewElement) convertView.getTag();
         }
 
-        listViewElement.setEventTitle("Title: "+currentBalance.getEventTitle().substring(0, 1).toUpperCase() + currentBalance.getEventTitle().substring(1));
+        listViewElement.setEventTitle("Title: "+currentBalance.getEventTitle());
         listViewElement.setEventDescription("Description: "+currentBalance.getEventDescription());
         listViewElement.setBalance("Balance: "+currentBalance.getBalance());
 

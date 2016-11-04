@@ -39,54 +39,66 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:orientation="horizontal"
-        android:background="@color/colorMenuBottom">
+        android:background="@color/colorMenuBottom"
+        android:orientation="horizontal">
 
 
-            <ImageButton
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:onClick="onClick_GoToAddEventActivity"
-                android:padding="10dp"
-                android:src="@drawable/plus_black" />
+        <ImageButton
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:onClick="onClick_GoToAddEventActivity"
+            android:padding="10dp"
+            android:src="@drawable/plus_black" />
 
-            <ImageButton
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:padding="10dp"
-                android:src="@drawable/events_white" />
+        <ImageButton
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:padding="10dp"
+            android:src="@drawable/events_white" />
 
-            <ImageButton
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:onClick="onClick_GoToBalanceActivity"
-                android:padding="10dp"
-                android:src="@drawable/balance_black" />
+        <ImageButton
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:onClick="onClick_GoToBalanceActivity"
+            android:padding="10dp"
+            android:src="@drawable/balance_black" />
 
-            <ImageButton
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:onClick="onClick_GoToUserActivity"
-                android:padding="10dp"
-                android:src="@drawable/user_black" />
-        </LinearLayout>
-         
+        <ImageButton
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:onClick="onClick_GoToUserActivity"
+            android:padding="10dp"
+            android:src="@drawable/user_black" />
+    </LinearLayout>
+     
 
-    <fragment
+    <LinearLayout
         android:id="@+id/listview"
-        android:name="pl.wozniakbartlomiej.receipt.Fragments.EventsFragment"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_above="@id/footerLayout"
-        android:layout_below="@id/headerLayout" />
+        android:layout_below="@id/headerLayout"
+        android:orientation="vertical">
+        <fragment
+            android:id="@+id/map"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+        <ListView
+            android:id="@+id/userEventsList"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+    </LinearLayout>
 </RelativeLayout>
 
 

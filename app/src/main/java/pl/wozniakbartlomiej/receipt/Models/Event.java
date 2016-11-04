@@ -9,6 +9,8 @@ public class Event {
     private String title;
     private String description;
     private int imageId;
+    private String latitude;
+    private String longitude;
 
     public String getId() {
         return id;
@@ -40,6 +42,22 @@ public class Event {
 
     public void setImageId(int imgResId) {
         this.imageId = imgResId;
+    }
+
+    public String getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
+    }
+
+    public String getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
     }
 
 }

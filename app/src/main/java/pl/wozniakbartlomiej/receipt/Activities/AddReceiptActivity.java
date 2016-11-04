@@ -81,6 +81,7 @@ public class AddReceiptActivity extends AppCompatActivity implements IServiceHel
      */
     @Override
     public void userServiceProcess(String result) {
+        session.checkResult(result);
         try {
             //Redirect to EventsActivity
             Intent i = new Intent(getApplicationContext(), EventBalanceActivity.class);

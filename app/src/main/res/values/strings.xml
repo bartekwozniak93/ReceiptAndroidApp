@@ -35,9 +35,5 @@
     <string name="qr_code_info">QR code</string>
     <string name="btn_getQRCode">get event QR code</string>
     <string name="btn_addEventByQR">add event by QR code</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="google_maps_key">AIzaSyANiS7Eq8x2-5I28R6GuluaRjfl3N7k7Zk</string>
 </resources>
-
-

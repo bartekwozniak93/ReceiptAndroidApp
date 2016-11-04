@@ -84,8 +84,8 @@ public class ReceiptEditActivity extends AppCompatActivity implements IServiceHe
      */
     @Override
     public void userServiceProcess(String result) {
+        session.checkResult(result);
         try {
-
             //Redirect to ReceiptEditActivity
             Intent i = new Intent(getApplicationContext(), EventReceiptsActivity.class);
             i.putExtra("eventId",eventId);

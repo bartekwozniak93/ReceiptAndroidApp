@@ -73,6 +73,7 @@ public class RegisterActivity extends AppCompatActivity implements IServiceHelpe
 
     @Override
     public void userServiceProcess(String result) {
+        session.checkResult(result);
         try {
             retrieveUserInformationFromJSON(result);
             Intent i = new Intent(getApplicationContext(), UserEventsActivity.class);
