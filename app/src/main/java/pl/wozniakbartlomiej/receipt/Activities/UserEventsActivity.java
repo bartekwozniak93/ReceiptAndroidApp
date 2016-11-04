@@ -8,14 +8,14 @@ import android.view.View;
 import pl.wozniakbartlomiej.receipt.R;
 import pl.wozniakbartlomiej.receipt.Services.UserSessionManager;
 
-public class UserActivity extends AppCompatActivity {
+public class UserEventsActivity extends AppCompatActivity {
 
     private UserSessionManager session;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user);
+        setContentView(R.layout.activity_user_events);
         initSession();
     }
 
@@ -28,18 +28,10 @@ public class UserActivity extends AppCompatActivity {
     }
 
     /**
-     * Go to Add Event Activity
+     * Go to AddEvent Activity
      */
     public void onClick_GoToAddEventActivity(View view){
         Intent i = new Intent(this, AddEventActivity.class);
-        startActivity(i);
-    }
-
-    /**
-     * Go to Main Activity
-     */
-    public void onClick_GoToMainActivity(View view){
-        Intent i = new Intent(this, UserEventsActivity.class);
         startActivity(i);
     }
 
@@ -48,6 +40,14 @@ public class UserActivity extends AppCompatActivity {
      */
     public void onClick_GoToBalanceActivity(View view){
         Intent i = new Intent(this, UserBalanceActivity.class);
+        startActivity(i);
+    }
+
+    /**
+     * Go to User Activity
+     */
+    public void onClick_GoToUserActivity(View view){
+        Intent i = new Intent(this, UserActivity.class);
         startActivity(i);
     }
 

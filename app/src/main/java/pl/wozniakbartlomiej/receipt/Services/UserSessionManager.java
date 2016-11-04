@@ -53,7 +53,7 @@ public class UserSessionManager {
     }
 
     /**
-     * Check user is logged in (redirect to MainActivity),
+     *
      * if not redirect to LoginActivity.
      * */
     public void checkLogin(){

@@ -75,8 +75,7 @@ public class RegisterActivity extends AppCompatActivity implements IServiceHelpe
     public void userServiceProcess(String result) {
         try {
             retrieveUserInformationFromJSON(result);
-            //Redirect to MainActivity
-            Intent i = new Intent(getApplicationContext(), MainActivity.class);
+            Intent i = new Intent(getApplicationContext(), UserEventsActivity.class);
             startActivity(i);
             finish();
         }

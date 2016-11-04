@@ -51,7 +51,7 @@ public class AddEventActivity extends AppCompatActivity implements IServiceHelpe
     @Override
     public void userServiceProcess(String result) {
         try {
-            Intent i = new Intent(getApplicationContext(), MainActivity.class);
+            Intent i = new Intent(getApplicationContext(), UserEventsActivity.class);
             startActivity(i);
             finish();
         }
@@ -86,7 +86,7 @@ public class AddEventActivity extends AppCompatActivity implements IServiceHelpe
      * Go to Events Activity
      */
     public void onClick_GoToMainActivity(View view){
-        Intent i = new Intent(this, MainActivity.class);
+        Intent i = new Intent(this, UserEventsActivity.class);
         startActivity(i);
     }
 
@@ -94,7 +94,7 @@ public class AddEventActivity extends AppCompatActivity implements IServiceHelpe
      * Go to Balance Activity
      */
     public void onClick_GoToBalanceActivity(View view){
-        Intent i = new Intent(this, BalanceActivity.class);
+        Intent i = new Intent(this, UserBalanceActivity.class);
         startActivity(i);
     }
 
@@ -110,7 +110,7 @@ public class AddEventActivity extends AppCompatActivity implements IServiceHelpe
      * Go to QR From Camera Activity
      */
     public void onClick_GoToQRFromCameraActivity(View view){
-        Intent i = new Intent(this, QRFromCameraActivity.class);
+        Intent i = new Intent(this, EventFromQrCodeActivity.class);
         startActivity(i);
     }
 

@@ -3,10 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:descendantFocusability="beforeDescendants"
     android:focusableInTouchMode="true"
-    android:orientation="vertical"
-    tools:context="pl.wozniakbartlomiej.receipt.Activities.UserActivity">
+    tools:context=".Activities.UserBalanceActivity">
 
     <LinearLayout
         android:id="@+id/headerLayout"
@@ -20,25 +20,26 @@
             android:layout_height="60dp"
             android:padding="10dp"
             android:scaleType="fitStart"
-            android:src="@drawable/man" />
+            android:src="@drawable/card" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="User details"
+            android:text="Your balance"
             android:textColor="@color/colorWhite"
             android:textSize="30dp" />
     </LinearLayout>
 
 
     <LinearLayout
-        android:id="@+id/footerLaout"
+        android:id="@+id/footerLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:background="@color/colorMenuBottom"
         android:orientation="horizontal">
+
 
         <ImageButton
             android:layout_width="0dp"
@@ -63,46 +64,26 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:onClick="onClick_GoToBalanceActivity"
             android:padding="10dp"
-            android:src="@drawable/balance_black" />
+            android:src="@drawable/balance_white" />
 
         <ImageButton
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="?attr/selectableItemBackgroundBorderless"
+            android:onClick="onClick_GoToUserActivity"
             android:padding="10dp"
-            android:src="@drawable/user_white" />
+            android:src="@drawable/user_black" />
     </LinearLayout>
      
-
-    <ScrollView
-        android:id="@+id/listview"
+    <FrameLayout
+        android:id="@+id/frameUserBalanceFragment"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_above="@id/footerLaout"
-        android:layout_below="@id/headerLayout">
+        android:layout_above="@id/footerLayout"
+        android:layout_below="@id/headerLayout" />
 
-        <LinearLayout
-            android:id="@+id/mainLayout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <fragment
-                android:id="@+id/fragment"
-                android:name="pl.wozniakbartlomiej.receipt.Fragments.UserLogOutFragment"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout="@layout/fragment_logout"
-                tools:layout="@layout/fragment_logout" />
-
-        </LinearLayout>
-
-    </ScrollView>
 
 
 </RelativeLayout>
-
-

@@ -286,4 +286,18 @@ public class ServiceHelper {
         return api_link + resources.getString(R.string.api_edit_receipt);
     }
 
+    /**
+     * Return link for event balance.
+     */
+    public static String getEventBalanceString() {
+        return api_link + resources.getString(R.string.api_get_event_balance);
+    }
+
+    /**
+     * Return link for user balance.
+     */
+    public static String getUserBalanceString() {
+        return api_link + resources.getString(R.string.api_get_user_balance);
+    }
+
 }

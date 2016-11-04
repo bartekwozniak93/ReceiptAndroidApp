@@ -11,8 +11,8 @@ import android.widget.TextView;
 
 import pl.wozniakbartlomiej.receipt.R;
 import pl.wozniakbartlomiej.receipt.Services.UserSessionManager;
-import pl.wozniakbartlomiej.receipt.Widgets.AutoCompleteFragment;
-import pl.wozniakbartlomiej.receipt.Widgets.UsersFragment;
+import pl.wozniakbartlomiej.receipt.Fragments.AutoCompleteFragment;
+import pl.wozniakbartlomiej.receipt.Fragments.UsersFragment;
 
 /**
  * Activity to add User to Event.
@@ -76,7 +76,7 @@ public class AddUserActivity extends AppCompatActivity {
      * Go to Event Activity.
      */
     public void onClick_GoToEventActivity(View view) {
-        Intent i = new Intent(this, EventActivity.class);
+        Intent i = new Intent(this, EventBalanceActivity.class);
         i.putExtra("eventId", eventId);
         i.putExtra("eventTitle", eventTitle);
         i.putExtra("eventDescription", eventDescription);

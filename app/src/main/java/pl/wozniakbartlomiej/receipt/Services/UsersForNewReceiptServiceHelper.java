@@ -11,8 +11,8 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-import pl.wozniakbartlomiej.receipt.Widgets.UsersForEditReceiptFragment;
-import pl.wozniakbartlomiej.receipt.Widgets.UsersForNewReceiptFragment;
+import pl.wozniakbartlomiej.receipt.Fragments.UsersForEditReceiptFragment;
+import pl.wozniakbartlomiej.receipt.Fragments.UsersForNewReceiptFragment;
 
 /*
  * Helper for REST Service for event's methods

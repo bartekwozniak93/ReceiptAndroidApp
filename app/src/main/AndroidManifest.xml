@@ -25,7 +25,9 @@
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
 
-        <activity android:name=".Activities.AddEventActivity">
+        <activity
+            android:name=".Activities.AddEventActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -36,24 +38,47 @@
             android:name="com.facebook.FacebookActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:label="@string/app_name"
+            android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"
             tools:replace="android:theme" />
         <activity
             android:name=".Activities.RegisterActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppThemeWithBar" />
         <activity
             android:name=".Activities.LoginActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppThemeWithBar" />
-        <activity android:name=".Activities.CameraActivity" />
-        <activity android:name=".Activities.MainActivity" />
-        <activity android:name=".Activities.EventActivity" />
-        <activity android:name=".Activities.AddReceiptActivity" />
-        <activity android:name=".Activities.ReceiptActivity" />
-        <activity android:name=".Activities.BalanceActivity" />
-        <activity android:name=".Activities.UserActivity" />
-        <activity android:name=".Activities.AddUserActivity" />
-        <activity android:name=".Activities.QRFromCameraActivity" />
-        <activity android:name=".Activities.QrCodeEventActivity"></activity>
+        <activity
+            android:name=".Activities.UserEventsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.EventBalanceActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.AddReceiptActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.ReceiptEditActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.UserBalanceActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.UserActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.AddUserActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.EventFromQrCodeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.EventQrCodeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.EventReceiptsActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>
